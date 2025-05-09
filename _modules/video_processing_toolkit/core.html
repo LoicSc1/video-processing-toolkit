@@ -371,7 +371,7 @@
 <span class="sd">        fps(int): The Frame rate of the created video stream</span>
 <span class="sd">        output_path(str): The path where the constructed video will be saved.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        None.</span>
+<span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">image_array</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">f</span><span class="p">))]</span>
@@ -402,7 +402,7 @@
 <span class="sd">        input_loc (str): Path to the input video file</span>
 <span class="sd">        output_loc (str): Directory where the frames will be saved.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        None.</span>
+<span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_loc</span><span class="p">)</span>
@@ -446,6 +446,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_images_regular_interval</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">time_interval_in_sec</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract the frames in every given &quot;time_interval&quot; e.g. 1 sec, 5 sec etc. from input video file</span>
 <span class="sd">    and save them as separate frames in an output directory.</span>
+<span class="sd">    </span>
 <span class="sd">    Args:</span>
 <span class="sd">        path_in(str): Input video file</span>
 <span class="sd">        path_out(str): Directory where the extracted frames will be saved</span>
@@ -591,6 +592,7 @@
                                                            <span class="n">time_interval_in_sec</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract frames after given regular intervals within two timestamps; Need to know the number of</span>
 <span class="sd">    frames per second and the start and end timestamp in the video.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        path_in (str): Path to the input video file</span>
 <span class="sd">        path_out (str): Directory where the extracted frames will be saved</span>

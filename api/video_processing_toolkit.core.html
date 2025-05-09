@@ -156,16 +156,17 @@ start and end timestamp in the video.</p>
 <dt class="sig sig-object py" id="video_processing_toolkit.core.extract_images_regular_interval">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">extract_images_regular_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_interval_in_sec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#extract_images_regular_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.extract_images_regular_interval" title="Link to this definition"></a></dt>
 <dd><p>Function to extract the frames in every given “time_interval” e.g. 1 sec, 5 sec etc. from input video file
-and save them as separate frames in an output directory.
-:param path_in: Input video file
-:type path_in: str
-:param path_out: Directory where the extracted frames will be saved
-:type path_out: str
-:param time_interval_in_sec: the time interval of the sampling, mention in seconds; we convert it into milliseconds.
-:type time_interval_in_sec: int</p>
+and save them as separate frames in an output directory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_in</strong> (<em>str</em>) – Input video file</p></li>
+<li><p><strong>path_out</strong> (<em>str</em>) – Directory where the extracted frames will be saved</p></li>
+<li><p><strong>time_interval_in_sec</strong> (<em>int</em>) – the time interval of the sampling, mention in seconds; we convert it into milliseconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -178,20 +179,19 @@ and save them as separate frames in an output directory.
 <dt class="sig sig-object py" id="video_processing_toolkit.core.extract_regular_interval_images_between_two_timestamps">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">extract_regular_interval_images_between_two_timestamps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_interval_in_sec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#extract_regular_interval_images_between_two_timestamps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.extract_regular_interval_images_between_two_timestamps" title="Link to this definition"></a></dt>
 <dd><p>Function to extract frames after given regular intervals within two timestamps; Need to know the number of
-frames per second and the start and end timestamp in the video.
-:param path_in: Path to the input video file
-:type path_in: str
-:param path_out: Directory where the extracted frames will be saved
-:type path_out: str
-:param hh_mm_ss_start: The start timestamp in “HH:MM:SS” format
-:type hh_mm_ss_start: str
-:param hh_mm_ss_end: The end timestamp in “HH:MM:SS” format
-:type hh_mm_ss_end: str
-:param time_interval_in_sec: The time interval (in seconds) between each frame extraction.
-:type time_interval_in_sec: int</p>
+frames per second and the start and end timestamp in the video.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_in</strong> (<em>str</em>) – Path to the input video file</p></li>
+<li><p><strong>path_out</strong> (<em>str</em>) – Directory where the extracted frames will be saved</p></li>
+<li><p><strong>hh_mm_ss_start</strong> (<em>str</em>) – The start timestamp in “HH:MM:SS” format</p></li>
+<li><p><strong>hh_mm_ss_end</strong> (<em>str</em>) – The end timestamp in “HH:MM:SS” format</p></li>
+<li><p><strong>time_interval_in_sec</strong> (<em>int</em>) – The time interval (in seconds) between each frame extraction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -209,7 +209,7 @@ frames per second and the start and end timestamp in the video.
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None.</p>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -328,7 +328,7 @@ The frame types are typically:
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None.</p>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>

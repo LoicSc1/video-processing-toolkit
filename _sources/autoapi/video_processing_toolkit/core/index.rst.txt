@@ -119,7 +119,7 @@ Module Contents
    :param output_path: The path where the constructed video will be saved.
    :type output_path: str
 
-   :returns: None.
+   :returns: None
 
 
 .. py:function:: video_to_all_frames(input_loc, output_loc)
@@ -131,13 +131,14 @@ Module Contents
    :param output_loc: Directory where the frames will be saved.
    :type output_loc: str
 
-   :returns: None.
+   :returns: None
 
 
 .. py:function:: extract_images_regular_interval(path_in, path_out, time_interval_in_sec)
 
    Function to extract the frames in every given "time_interval" e.g. 1 sec, 5 sec etc. from input video file
    and save them as separate frames in an output directory.
+
    :param path_in: Input video file
    :type path_in: str
    :param path_out: Directory where the extracted frames will be saved
@@ -187,6 +188,7 @@ Module Contents
 
    Function to extract frames after given regular intervals within two timestamps; Need to know the number of
    frames per second and the start and end timestamp in the video.
+
    :param path_in: Path to the input video file
    :type path_in: str
    :param path_out: Directory where the extracted frames will be saved
