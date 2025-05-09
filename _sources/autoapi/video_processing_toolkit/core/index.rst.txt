@@ -118,6 +118,7 @@ Module Contents
 
    Function to extract all the frames from input video file
    and save them as separate frames in an output directory.
+
    :param input_loc: Path to the input video file.
    :type input_loc: str
    :param output_loc: Directory where the frames will be saved.
