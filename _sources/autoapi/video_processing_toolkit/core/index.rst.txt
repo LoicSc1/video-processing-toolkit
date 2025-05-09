@@ -93,12 +93,12 @@ Module Contents
 
 .. py:function:: compute_frame_per_sec_rate(video_file: str) -> int
 
-   Function to compute the frame per seconds or pfs
+   Function to compute the frame per seconds or pfs.
 
-   :param video_file: Path of the video file
+   :param video_file: Path of the video file.
    :type video_file: str
 
-   :returns: The Frame rate of the created video stream
+   :returns: The Frame rate of the created video stream.
    :rtype: int
 
 
