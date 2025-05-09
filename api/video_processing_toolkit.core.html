@@ -36,13 +36,14 @@
 <dt class="sig sig-object py" id="video_processing_toolkit.core.compute_frame_per_sec_rate">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">compute_frame_per_sec_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">video_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#compute_frame_per_sec_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.compute_frame_per_sec_rate" title="Link to this definition">¶</a></dt>
 <dd><p>Function to compute the frame per seconds or pfs
-:param video_file: Path of the video file</p>
+:param video_file: Path of the video file
+:type video_file: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The Frame rate of the created video stream</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>fps</p>
+<dd class="field-even"><p>fps(int)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -51,14 +52,15 @@
 <dt class="sig sig-object py" id="video_processing_toolkit.core.convert_video">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">convert_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputed_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#convert_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.convert_video" title="Link to this definition">¶</a></dt>
 <dd><p>Function to convert the video file into .avi format and save it into current project directory
-:param inputed_file: Path of the input video file</p>
+:param inputed_file: Path of the input video file
+:type inputed_file: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The name of the output video file, which automatically takes the name from current time and save the
 file into current project folder</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>video_name</p>
+<dd class="field-even"><p>video_name(str)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -69,8 +71,11 @@ file into current project folder</p>
 <dd><p>Function to extract the frame at a particular time stamp; Need to know the number of frames per second and the
 timestamp in the video , we want to take frame from, we can easily calculate the frame number we want
 :param path_in: Input video file.
-:param hh_mm_ss: the time
-:param path_out: Output directory to save the frames.</p>
+:type path_in: str
+:param path_out: Directory where the extracted frame will be saved.
+:type path_out: str
+:param hh_mm_ss: The timestamp in “HH:MM:SS” format where the frame should be extracted.
+:type hh_mm_ss: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -83,10 +88,14 @@ timestamp in the video , we want to take frame from, we can easily calculate the
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">extract_images_between_two_timestamps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#extract_images_between_two_timestamps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.extract_images_between_two_timestamps" title="Link to this definition">¶</a></dt>
 <dd><p>Function to extract all the frames within two timestamps; Need to know the number of frames per second and the
 start and end timestamp in the video
-:param path_in: Input video file.
-:param hh_mm_ss_start: the time starting time stamp
-:param hh_mm_ss_end: the time ending time stamp
-:param path_out: Output directory to save the frames.</p>
+:param path_in: Path to the input video file.
+:type path_in: str
+:param path_out: Directory where the extracted frames will be saved.
+:type path_out: str
+:param hh_mm_ss_start: The start timestamp in “HH:MM:SS” format.
+:type hh_mm_ss_start: str
+:param hh_mm_ss_end: The end timestamp in “HH:MM:SS” format.
+:type hh_mm_ss_end: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -100,8 +109,11 @@ start and end timestamp in the video
 <dd><p>Function to extract the frames in every given “time_interval” e.g. 1 sec, 5 sec etc. from input video file
 and save them as separate frames in an output directory.
 :param path_in: Input video file.
+:type path_in: str
+:param path_out: Directory where the extracted frames will be saved.
+:type path_out: str
 :param time_interval_in_sec: the time interval of the sampling, mention in seconds; we convert it into milliseconds
-:param path_out: Output directory to save the frames.</p>
+:type time_interval_in_sec: int</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -118,11 +130,16 @@ and save them as separate frames in an output directory.
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">extract_regular_interval_images_between_two_timestamps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_interval_in_sec</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#extract_regular_interval_images_between_two_timestamps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.extract_regular_interval_images_between_two_timestamps" title="Link to this definition">¶</a></dt>
 <dd><p>Function to extract frames after given regular intervals within two timestamps; Need to know the number of
 frames per second and the start and end timestamp in the video
-:param path_in: Input video file.
-:param hh_mm_ss_start: the time starting time stamp
-:param hh_mm_ss_end: the time ending time stamp
-:param time_interval_in_sec: The regular time interval
-:param path_out: Output directory to save the frames.</p>
+:param path_in: Path to the input video file.
+:type path_in: str
+:param path_out: Directory where the extracted frames will be saved.
+:type path_out: str
+:param hh_mm_ss_start: The start timestamp in “HH:MM:SS” format.
+:type hh_mm_ss_start: str
+:param hh_mm_ss_end: The end timestamp in “HH:MM:SS” format.
+:type hh_mm_ss_end: str
+:param time_interval_in_sec: The time interval (in seconds) between each frame extraction.
+:type time_interval_in_sec: int</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -135,8 +152,11 @@ frames per second and the start and end timestamp in the video
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">frames_to_video</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#frames_to_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.frames_to_video" title="Link to this definition">¶</a></dt>
 <dd><p>Function reads all the individual frames, saved in a directory and then use them to create a video
 :param input_path: Path of the directory where the images or frames are saved
+:type input_path: str
 :param fps: The Frame rate of the created video stream.
-:param output_path: The path where the constructed video will be saved</p>
+:type fps: int
+:param output_path: The path where the constructed video will be saved
+:type output_path: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -179,7 +199,7 @@ The frame types are typically:
 <dd><p>Function to extract and save all I-frames of a complete video as image files.
 :param video_file: Path to the input video file.
 :type video_file: str
-:param path_out: The output folder to save all the extracted frames.
+:param path_out: Directory where the extracted frames will be saved.
 :type path_out: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -191,12 +211,15 @@ The frame types are typically:
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.core.save_all_i_keyframes_between_two_timestamps">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">save_all_i_keyframes_between_two_timestamps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">video_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#save_all_i_keyframes_between_two_timestamps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.save_all_i_keyframes_between_two_timestamps" title="Link to this definition">¶</a></dt>
-<dd><p>Function to extract and save all the all I-frames of a complete video as image files between two timestamps.
+<dd><p>Function to extract and save all the I-frames of a complete video as image files between two timestamps.
 :param video_file: Path to the input video file.
 :type video_file: str
 :param path_out: The output folder to save all the output frames
+:type path_out: str
 :param hh_mm_ss_start: the time starting time stamp
-:param hh_mm_ss_end: the time ending time stamp</p>
+:type hh_mm_ss_start: str
+:param hh_mm_ss_end: the time ending time stamp
+:type hh_mm_ss_end: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -210,7 +233,8 @@ The frame types are typically:
 <dd><p>Function to extract all P-frames from a complete video as image files.
 :param video_file: Path to the input video file.
 :type video_file: str
-:param path_out: The output folder to save all the output frames</p>
+:param path_out: Directory where the extracted frames will be saved.
+:type path_out: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -222,10 +246,14 @@ The frame types are typically:
 <dt class="sig sig-object py" id="video_processing_toolkit.core.save_all_p_keyframes_between_two_timestamps">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">save_all_p_keyframes_between_two_timestamps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">video_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hh_mm_ss_end</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#save_all_p_keyframes_between_two_timestamps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.save_all_p_keyframes_between_two_timestamps" title="Link to this definition">¶</a></dt>
 <dd><p>Function to extract  and save all the p-key frames of a complete video
-:param video_file: Input video file.
-:param path_out: The output folder to save all the output frames
+:param video_file: Path to the input video file.
+:type video_file: str
+:param path_out: Directory where the extracted frames will be saved.
+:type path_out: str
 :param hh_mm_ss_start: the time starting time stamp
-:param hh_mm_ss_end: the time ending time stamp</p>
+:type hh_mm_ss_start: str
+:param hh_mm_ss_end: the time ending time stamp
+:type hh_mm_ss_end: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
@@ -238,8 +266,10 @@ The frame types are typically:
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.core.</span></span><span class="sig-name descname"><span class="pre">video_to_all_frames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_loc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_loc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/core.html#video_to_all_frames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.core.video_to_all_frames" title="Link to this definition">¶</a></dt>
 <dd><p>Function to extract all the frames from input video file
 and save them as separate frames in an output directory.
-:param input_loc: Input video file.
-:param output_loc: Output directory to save the frames.</p>
+:param input_loc: Path to the input video file.
+:type input_loc: str
+:param output_loc: Directory where the frames will be saved.
+:type output_loc: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>

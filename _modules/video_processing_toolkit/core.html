@@ -66,7 +66,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract and save all I-frames of a complete video as image files.</span>
 <span class="sd">    Args:</span>
 <span class="sd">        video_file(str): Path to the input video file.</span>
-<span class="sd">        path_out(str): The output folder to save all the extracted frames.</span>
+<span class="sd">        path_out(str): Directory where the extracted frames will be saved.</span>
 <span class="sd">    Returns: </span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -100,12 +100,12 @@
 <div class="viewcode-block" id="save_all_i_keyframes_between_two_timestamps">
 <a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.save_all_i_keyframes_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_i_keyframes_between_two_timestamps</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract and save all the all I-frames of a complete video as image files between two timestamps.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract and save all the I-frames of a complete video as image files between two timestamps.</span>
 <span class="sd">    Args:</span>
 <span class="sd">        video_file(str): Path to the input video file.</span>
-<span class="sd">        path_out: The output folder to save all the output frames</span>
-<span class="sd">        hh_mm_ss_start: the time starting time stamp</span>
-<span class="sd">        hh_mm_ss_end: the time ending time stamp</span>
+<span class="sd">        path_out(str): The output folder to save all the output frames</span>
+<span class="sd">        hh_mm_ss_start(str): the time starting time stamp</span>
+<span class="sd">        hh_mm_ss_end(str): the time ending time stamp</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -169,7 +169,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all P-frames from a complete video as image files.</span>
 <span class="sd">    Args:</span>
 <span class="sd">        video_file(str): Path to the input video file.</span>
-<span class="sd">        path_out: The output folder to save all the output frames</span>
+<span class="sd">        path_out(str): Directory where the extracted frames will be saved.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
@@ -205,10 +205,10 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_p_keyframes_between_two_timestamps</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract  and save all the p-key frames of a complete video</span>
 <span class="sd">    Args:</span>
-<span class="sd">        video_file: Input video file.</span>
-<span class="sd">        path_out: The output folder to save all the output frames</span>
-<span class="sd">        hh_mm_ss_start: the time starting time stamp</span>
-<span class="sd">        hh_mm_ss_end: the time ending time stamp</span>
+<span class="sd">        video_file(str): Path to the input video file.</span>
+<span class="sd">        path_out(str): Directory where the extracted frames will be saved.</span>
+<span class="sd">        hh_mm_ss_start(str): the time starting time stamp</span>
+<span class="sd">        hh_mm_ss_end(str): the time ending time stamp</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -271,10 +271,10 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_video</span><span class="p">(</span><span class="n">inputed_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to convert the video file into .avi format and save it into current project directory</span>
 <span class="sd">    Args:</span>
-<span class="sd">        inputed_file: Path of the input video file</span>
+<span class="sd">        inputed_file(str): Path of the input video file</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        video_name: The name of the output video file, which automatically takes the name from current time and save the</span>
+<span class="sd">        video_name(str): The name of the output video file, which automatically takes the name from current time and save the</span>
 <span class="sd">        file into current project folder</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S&quot;</span><span class="p">)</span>
@@ -291,10 +291,10 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_frame_per_sec_rate</span><span class="p">(</span><span class="n">video_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to compute the frame per seconds or pfs</span>
 <span class="sd">    Args:</span>
-<span class="sd">        video_file: Path of the video file</span>
+<span class="sd">        video_file(str): Path of the video file</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        fps: The Frame rate of the created video stream</span>
+<span class="sd">        fps(int): The Frame rate of the created video stream</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find OpenCV version</span>
     <span class="p">(</span><span class="n">major_ver</span><span class="p">,</span> <span class="n">minor_ver</span><span class="p">,</span> <span class="n">subminor_ver</span><span class="p">)</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
@@ -316,9 +316,9 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">frames_to_video</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function reads all the individual frames, saved in a directory and then use them to create a video</span>
 <span class="sd">    Args:</span>
-<span class="sd">        input_path: Path of the directory where the images or frames are saved</span>
-<span class="sd">        fps: The Frame rate of the created video stream.</span>
-<span class="sd">        output_path: The path where the constructed video will be saved</span>
+<span class="sd">        input_path(str): Path of the directory where the images or frames are saved</span>
+<span class="sd">        fps(int): The Frame rate of the created video stream.</span>
+<span class="sd">        output_path(str): The path where the constructed video will be saved</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -348,8 +348,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all the frames from input video file</span>
 <span class="sd">    and save them as separate frames in an output directory.</span>
 <span class="sd">    Args:</span>
-<span class="sd">        input_loc: Input video file.</span>
-<span class="sd">        output_loc: Output directory to save the frames.</span>
+<span class="sd">        input_loc(str): Path to the input video file.</span>
+<span class="sd">        output_loc(str): Directory where the frames will be saved.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -396,9 +396,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract the frames in every given &quot;time_interval&quot; e.g. 1 sec, 5 sec etc. from input video file</span>
 <span class="sd">    and save them as separate frames in an output directory.</span>
 <span class="sd">    Args:</span>
-<span class="sd">        path_in: Input video file.</span>
-<span class="sd">        time_interval_in_sec: the time interval of the sampling, mention in seconds; we convert it into milliseconds</span>
-<span class="sd">        path_out: Output directory to save the frames.</span>
+<span class="sd">        path_in(str): Input video file.</span>
+<span class="sd">        path_out(str): Directory where the extracted frames will be saved.</span>
+<span class="sd">        time_interval_in_sec(int): the time interval of the sampling, mention in seconds; we convert it into milliseconds</span>
+<span class="sd">        </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    Resources:</span>
@@ -431,9 +432,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract the frame at a particular time stamp; Need to know the number of frames per second and the</span>
 <span class="sd">    timestamp in the video , we want to take frame from, we can easily calculate the frame number we want</span>
 <span class="sd">    Args:</span>
-<span class="sd">        path_in: Input video file.</span>
-<span class="sd">        hh_mm_ss: the time</span>
-<span class="sd">        path_out: Output directory to save the frames.</span>
+<span class="sd">        path_in(str): Input video file.</span>
+<span class="sd">        path_out (str): Directory where the extracted frame will be saved.</span>
+<span class="sd">        hh_mm_ss(str): The timestamp in &quot;HH:MM:SS&quot; format where the frame should be extracted.</span>
+<span class="sd">        </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -476,10 +478,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all the frames within two timestamps; Need to know the number of frames per second and the</span>
 <span class="sd">    start and end timestamp in the video</span>
 <span class="sd">    Args:</span>
-<span class="sd">        path_in: Input video file.</span>
-<span class="sd">        hh_mm_ss_start: the time starting time stamp</span>
-<span class="sd">        hh_mm_ss_end: the time ending time stamp</span>
-<span class="sd">        path_out: Output directory to save the frames.</span>
+<span class="sd">        path_in(str): Path to the input video file.</span>
+<span class="sd">        path_out(str): Directory where the extracted frames will be saved.</span>
+<span class="sd">        hh_mm_ss_start (str): The start timestamp in &quot;HH:MM:SS&quot; format.</span>
+<span class="sd">        hh_mm_ss_end (str): The end timestamp in &quot;HH:MM:SS&quot; format.</span>
+<span class="sd">        </span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
@@ -540,11 +543,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract frames after given regular intervals within two timestamps; Need to know the number of</span>
 <span class="sd">    frames per second and the start and end timestamp in the video</span>
 <span class="sd">    Args:</span>
-<span class="sd">        path_in: Input video file.</span>
-<span class="sd">        hh_mm_ss_start: the time starting time stamp</span>
-<span class="sd">        hh_mm_ss_end: the time ending time stamp</span>
-<span class="sd">        time_interval_in_sec: The regular time interval</span>
-<span class="sd">        path_out: Output directory to save the frames.</span>
+<span class="sd">        path_in (str): Path to the input video file.</span>
+<span class="sd">        path_out (str): Directory where the extracted frames will be saved.</span>
+<span class="sd">        hh_mm_ss_start (str): The start timestamp in &quot;HH:MM:SS&quot; format.</span>
+<span class="sd">        hh_mm_ss_end (str): The end timestamp in &quot;HH:MM:SS&quot; format.</span>
+<span class="sd">        time_interval_in_sec (int): The time interval (in seconds) between each frame extraction.</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
