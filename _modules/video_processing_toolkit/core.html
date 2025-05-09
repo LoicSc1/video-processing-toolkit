@@ -288,13 +288,13 @@
 
 <div class="viewcode-block" id="compute_frame_per_sec_rate">
 <a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.compute_frame_per_sec_rate">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_frame_per_sec_rate</span><span class="p">(</span><span class="n">video_file</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_frame_per_sec_rate</span><span class="p">(</span><span class="n">video_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to compute the frame per seconds or pfs</span>
 <span class="sd">    Args:</span>
-<span class="sd">        video_file(str): Path of the video file</span>
+<span class="sd">        video_file (str): Path of the video file</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        fps(int): The Frame rate of the created video stream</span>
+<span class="sd">        int : The Frame rate of the created video stream</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find OpenCV version</span>
     <span class="p">(</span><span class="n">major_ver</span><span class="p">,</span> <span class="n">minor_ver</span><span class="p">,</span> <span class="n">subminor_ver</span><span class="p">)</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
