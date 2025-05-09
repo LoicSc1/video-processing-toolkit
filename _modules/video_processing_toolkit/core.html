@@ -50,7 +50,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        video_file (str): Path to the input video file.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        zip: A zip object containing tuples of (frame_index, frame_type),</span>
+<span class="sd">        Zip: A zip object containing tuples of (frame_index, frame_type),</span>
 <span class="sd">             where frame_index is an integer and frame_type is a string (&#39;I&#39;, &#39;P&#39;, &#39;B&#39;).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;ffprobe -v error -show_entries frame=pict_type -of default=noprint_wrappers=1&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -274,7 +274,7 @@
 <span class="sd">        inputed_file(str): Path of the input video file</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        video_name(str): The name of the output video file, which automatically takes the name from current time and save the</span>
+<span class="sd">        str: The name of the output video file, which automatically takes the name from current time and save the</span>
 <span class="sd">        file into current project folder</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S&quot;</span><span class="p">)</span>
