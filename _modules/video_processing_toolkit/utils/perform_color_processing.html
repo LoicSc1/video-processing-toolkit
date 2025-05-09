@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>video_processing_toolkit.utils.perform_color_processing &mdash; Video Processing Toolkit 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Video Processing Toolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">Video Processing Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../history.html">History</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Video Processing Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">video_processing_toolkit.utils.perform_color_processing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for video_processing_toolkit.utils.perform_color_processing</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="c1"># import ffmpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">videoanalyst.nodes.sources</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageFile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">videoanalyst.nodes.operators</span><span class="w"> </span><span class="kn">import</span> <span class="n">FieldSegmentation</span><span class="p">,</span> <span class="n">Mask</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">videoanalyst.engine.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">PILImage</span>
+
+
+<div class="viewcode-block" id="ColorProcessing">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ColorProcessing</span><span class="p">:</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; I am inside init function of test file &quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.plot_img">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.plot_img">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plot_img</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">Image</span><span class="p">):</span>
+
+        <span class="n">img_rgb</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">to_color_mode</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">array</span>
+        <span class="k">return</span> <span class="n">PILImage</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.channel_histogram">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.channel_histogram">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">channel_histogram</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            Note : 257 bins since bins are divided as [0,1), [1,2), ..., [254,255), [255,256]. If we took</span>
+<span class="sd">            256 bin, the last bin would have been [254,255] thus concatenating two values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">histogram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">channel</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">257</span><span class="p">))</span>
+        <span class="n">histogram_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">histogram</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">256</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">histogram_list</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.histogram_peak">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.histogram_peak">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">histogram_peak</span><span class="p">(</span><span class="n">histogram</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">histogram</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">histogram</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.morphological_opening">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.morphological_opening">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">morphological_opening</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">morph_size</span><span class="p">):</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">morph_size</span><span class="p">,</span> <span class="n">morph_size</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">morphologyEx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">MORPH_OPEN</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.morphological_closing">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.morphological_closing">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">morphological_closing</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">morph_size</span><span class="p">):</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">morph_size</span><span class="p">,</span> <span class="n">morph_size</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">morphologyEx</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">MORPH_CLOSE</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.gaussian_blur">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.gaussian_blur">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gaussian_blur</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">std</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">),</span> <span class="n">std</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.threshold">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.threshold">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">threshold</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">threshmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">threshmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">mask_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">channel</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshmin</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">mask_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">channel</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshmax</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">mask_1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">mask_2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+        <span class="k">return</span> <span class="n">mask</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.compute_field_mask_cvprw_2018">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.compute_field_mask_cvprw_2018">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_field_mask_cvprw_2018</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">str_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to generate the mask for field segmentation</span>
+<span class="sd">        Args:</span>
+<span class="sd">            frame: Input opencv image</span>
+<span class="sd">            str_type: there are two type of approximation used: &quot;epsilon&quot; and &quot;threshold_approximation&quot;; This operator</span>
+<span class="sd">            helps to smooth the boundary of the image</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        Resources:</span>
+<span class="sd">            &quot;A bottom-up approach based on semantics for the interpretation of the main camera stream in soccer games&quot;</span>
+<span class="sd">            URL: http://www.telecom.ulg.ac.be/publi/publications/anthony/Anthony2018ABottomUp/index.html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Parameters</span>
+        <span class="n">threshold_width</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">gaussian_blur_size</span> <span class="o">=</span> <span class="mi">9</span>
+        <span class="n">gaussian_blur_std</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">max_number_of_contour_edges</span> <span class="o">=</span> <span class="mi">20</span>
+
+        <span class="n">frame_hsv</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2HSV</span><span class="p">)</span>
+        <span class="n">frame_hsv_filtered</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">gaussian_blur</span><span class="p">(</span><span class="n">frame_hsv</span><span class="p">,</span> <span class="n">gaussian_blur_size</span><span class="p">,</span> <span class="n">gaussian_blur_std</span><span class="p">)</span>
+
+        <span class="n">histogram</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">channel_histogram</span><span class="p">(</span><span class="n">frame_hsv_filtered</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">histogram_peak</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">histogram_peak</span><span class="p">(</span><span class="n">histogram</span><span class="p">)</span>
+
+        <span class="n">thresholded_mask</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">frame_hsv_filtered</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                                     <span class="n">threshmin</span><span class="o">=</span><span class="n">histogram_peak</span> <span class="o">-</span> <span class="n">threshold_width</span><span class="p">,</span>
+                                                     <span class="n">threshmax</span><span class="o">=</span><span class="n">histogram_peak</span> <span class="o">+</span> <span class="n">threshold_width</span><span class="p">)</span>
+
+        <span class="n">filtered_mask</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">morphological_opening</span><span class="p">(</span><span class="n">thresholded_mask</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+        <span class="n">filtered_mask</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">morphological_closing</span><span class="p">(</span><span class="n">filtered_mask</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+
+        <span class="n">kernel_dilation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">13</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="n">filtered_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">dilate</span><span class="p">(</span><span class="n">filtered_mask</span><span class="p">,</span> <span class="n">kernel_dilation</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">contours</span><span class="p">,</span> <span class="n">hierarchy</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span><span class="n">filtered_mask</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">RETR_TREE</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>
+
+        <span class="n">areas</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">contour</span> <span class="ow">in</span> <span class="n">contours</span><span class="p">:</span>
+            <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">contourArea</span><span class="p">(</span><span class="n">contour</span><span class="p">))</span>
+
+        <span class="n">max_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">areas</span><span class="p">)</span>
+
+        <span class="c1"># Approximation and convex Hull</span>
+        <span class="n">field_contour</span> <span class="o">=</span> <span class="n">contours</span><span class="p">[</span><span class="n">max_index</span><span class="p">]</span>
+        <span class="n">threshold_contour_approximation</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">str_type</span> <span class="o">==</span> <span class="s2">&quot;epsilon&quot;</span><span class="p">:</span>
+            <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">cv2</span><span class="o">.</span><span class="n">arcLength</span><span class="p">(</span><span class="n">field_contour</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="n">field_contour</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">approxPolyDP</span><span class="p">(</span><span class="n">field_contour</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">str_type</span> <span class="o">==</span> <span class="s2">&quot;threshold_approximation&quot;</span><span class="p">:</span>
+            <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">field_contour</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_number_of_contour_edges</span><span class="p">:</span>
+                <span class="n">threshold_contour_approximation</span> <span class="o">=</span> <span class="n">threshold_contour_approximation</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">field_contour</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">approxPolyDP</span><span class="p">(</span><span class="n">field_contour</span><span class="p">,</span> <span class="n">threshold_contour_approximation</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">field_contour</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">convexHull</span><span class="p">(</span><span class="n">field_contour</span><span class="p">)</span>
+
+        <span class="n">filtered_mask</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">drawContours</span><span class="p">(</span><span class="n">filtered_mask</span><span class="p">,</span> <span class="p">[</span><span class="n">field_contour</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># cv2.imshow(&quot;image&quot;, filtered_mask)</span>
+        <span class="c1"># cv2.waitKey(0)</span>
+
+        <span class="k">return</span> <span class="n">filtered_mask</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.compute_field_mask_nils">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.compute_field_mask_nils">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_field_mask_nils</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span>
+
+        <span class="c1"># path = Path(&quot;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/&quot;</span>
+        <span class="c1">#             &quot;save_frames_regular_time_interval/00043.jpg&quot;)</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+        <span class="n">image_source</span> <span class="o">=</span> <span class="n">ImageFile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="n">segmentation_node</span> <span class="o">=</span> <span class="n">FieldSegmentation</span><span class="p">()</span>
+        <span class="n">image_source</span><span class="p">()</span>
+        <span class="n">segmentation_node</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">image_source</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="n">result_img</span> <span class="o">=</span> <span class="n">segmentation_node</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">plot_img</span><span class="p">(</span><span class="n">result_img</span><span class="p">)</span>
+        <span class="n">pil_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">my_mask</span> <span class="o">=</span> <span class="n">Mask</span><span class="p">()</span>
+        <span class="n">my_mask</span><span class="p">(</span><span class="n">image_source</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">result_img</span><span class="p">)</span>
+        <span class="n">merged_imag</span> <span class="o">=</span> <span class="n">my_mask</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="n">pil_image</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">plot_img</span><span class="p">(</span><span class="n">merged_imag</span><span class="p">)</span>
+        <span class="n">pil_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">pil_image</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.generate_batch_background_image">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.generate_batch_background_image">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_batch_background_image</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to generate the mask for field segmentation</span>
+<span class="sd">        Args:</span>
+<span class="sd">            all_dir_path: The main directory path where all the subdirectory exist</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        Resources:</span>
+<span class="sd">            &quot;A bottom-up approach based on semantics for the interpretation of the main camera stream in soccer games&quot;</span>
+<span class="sd">            URL: http://www.telecom.ulg.ac.be/publi/publications/anthony/Anthony2018ABottomUp/index.html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># list file and directories</span>
+        <span class="n">all_sub_dirs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sub_dir</span> <span class="ow">in</span> <span class="n">all_sub_dirs</span><span class="p">:</span>
+            <span class="n">make_full_dir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">,</span> <span class="n">sub_dir</span><span class="p">,</span> <span class="s2">&quot;i_frames&quot;</span><span class="p">)</span>
+            <span class="n">make_full_dir_masked</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">,</span> <span class="n">sub_dir</span><span class="p">,</span> <span class="s2">&quot;backgd_removed_images&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">make_full_dir_masked</span><span class="p">):</span>  <span class="c1"># if the masked directory doesn&#39;t exist</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">make_full_dir_masked</span><span class="p">)</span>  <span class="c1"># create a new directory</span>
+
+            <span class="n">jpg_files</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">make_full_dir_path</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.jpg&#39;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">get_files</span> <span class="ow">in</span> <span class="n">jpg_files</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">get_files</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">spec_image_files</span><span class="p">:</span>
+                    <span class="n">img_file_name_with_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">get_files</span><span class="p">))</span>
+                    <span class="n">img_frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">get_files</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+
+                    <span class="c1"># get_mask_1 = ColorProcessing.compute_field_mask_cvprw_2018(img_frame, &quot;epsilon&quot;)</span>
+                    <span class="n">get_mask_2</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">compute_field_mask_cvprw_2018</span><span class="p">(</span><span class="n">img_frame</span><span class="p">,</span> <span class="s2">&quot;threshold_approximation&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># masked_1 = cv2.bitwise_and(img_frame, img_frame, mask=get_mask_1)</span>
+                    <span class="n">masked_2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">img_frame</span><span class="p">,</span> <span class="n">img_frame</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">get_mask_2</span><span class="p">)</span>
+
+                    <span class="n">full_dir_path_masked_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_full_dir_masked</span><span class="p">,</span> <span class="n">img_file_name_with_ext</span><span class="p">)</span>
+                    <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">full_dir_path_masked_img</span><span class="p">,</span> <span class="n">masked_2</span><span class="p">)</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.apply_nils_background_removal_on_image">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.apply_nils_background_removal_on_image">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_nils_background_removal_on_image</span><span class="p">(</span><span class="n">img_file_path</span><span class="p">):</span>
+
+        <span class="n">img_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">img_file_path</span><span class="p">)</span>
+        <span class="n">image_source</span> <span class="o">=</span> <span class="n">ImageFile</span><span class="p">(</span><span class="n">img_file_path</span><span class="p">)</span>
+
+        <span class="n">segmentation_node</span> <span class="o">=</span> <span class="n">FieldSegmentation</span><span class="p">()</span>
+        <span class="n">segmentation_node</span><span class="o">.</span><span class="n">border_size</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">25</span>
+        <span class="n">image_source</span><span class="p">()</span>
+
+        <span class="n">segmentation_node</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">image_source</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="n">result_img</span> <span class="o">=</span> <span class="n">segmentation_node</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span>
+        <span class="c1"># pil_result_image = ColorProcessing.plot_img(result_img)</span>
+
+        <span class="n">my_mask</span> <span class="o">=</span> <span class="n">Mask</span><span class="p">()</span>
+        <span class="n">my_mask</span><span class="p">(</span><span class="n">image_source</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">result_img</span><span class="p">)</span>
+        <span class="n">merged_imag</span> <span class="o">=</span> <span class="n">my_mask</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="n">pil_masked_image</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">plot_img</span><span class="p">(</span><span class="n">merged_imag</span><span class="p">)</span>
+        <span class="n">pil_masked_image</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ColorProcessing.generate_batch_background_image_nils">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.ColorProcessing.generate_batch_background_image_nils">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_batch_background_image_nils</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to generate the mask for field segmentation</span>
+<span class="sd">        Args:</span>
+<span class="sd">            all_dir_path: The main directory path where all the subdirectory exist</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        Resources:</span>
+<span class="sd">            &quot;A bottom-up approach based on semantics for the interpretation of the main camera stream in soccer games&quot;</span>
+<span class="sd">            URL: http://www.telecom.ulg.ac.be/publi/publications/anthony/Anthony2018ABottomUp/index.html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># list file and directories</span>
+        <span class="n">all_sub_dirs</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">sub_dir</span> <span class="ow">in</span> <span class="n">all_sub_dirs</span><span class="p">:</span>
+            <span class="n">make_full_dir_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">,</span> <span class="n">sub_dir</span><span class="p">,</span> <span class="s2">&quot;i_frames&quot;</span><span class="p">)</span>
+            <span class="n">make_full_dir_masked</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">,</span> <span class="n">sub_dir</span><span class="p">,</span> <span class="s2">&quot;Nils_backgd_removed_images&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">make_full_dir_masked</span><span class="p">):</span>  <span class="c1"># if the masked directory doesn&#39;t exist</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">make_full_dir_masked</span><span class="p">)</span>  <span class="c1"># create a new directory</span>
+
+            <span class="n">jpg_files</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">make_full_dir_path</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*.jpg&#39;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">get_files</span> <span class="ow">in</span> <span class="n">jpg_files</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">get_files</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">spec_image_files</span><span class="p">:</span>
+                    <span class="n">img_file_name_with_ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">get_files</span><span class="p">))</span>
+
+                    <span class="n">img_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">get_files</span><span class="p">)</span>
+                    <span class="n">image_source</span> <span class="o">=</span> <span class="n">ImageFile</span><span class="p">(</span><span class="n">img_file_path</span><span class="p">)</span>
+
+                    <span class="n">segmentation_node</span> <span class="o">=</span> <span class="n">FieldSegmentation</span><span class="p">()</span>
+                    <span class="n">segmentation_node</span><span class="o">.</span><span class="n">border_size</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">80</span>
+                    <span class="n">image_source</span><span class="p">()</span>
+
+                    <span class="n">segmentation_node</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">image_source</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+                    <span class="n">result_img</span> <span class="o">=</span> <span class="n">segmentation_node</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span>
+                    <span class="c1"># pil_result_image = ColorProcessing.plot_img(result_img)</span>
+
+                    <span class="n">my_mask</span> <span class="o">=</span> <span class="n">Mask</span><span class="p">()</span>
+                    <span class="n">my_mask</span><span class="p">(</span><span class="n">image_source</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">result_img</span><span class="p">)</span>
+                    <span class="n">merged_imag</span> <span class="o">=</span> <span class="n">my_mask</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">value</span>
+
+                    <span class="n">pil_masked_image</span> <span class="o">=</span> <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">plot_img</span><span class="p">(</span><span class="n">merged_imag</span><span class="p">)</span>
+
+                    <span class="n">full_dir_path_masked_img</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_full_dir_masked</span><span class="p">,</span> <span class="n">img_file_name_with_ext</span><span class="p">)</span>
+                    <span class="n">pil_masked_image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">full_dir_path_masked_img</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.main">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">all_dir_path</span> <span class="o">=</span> <span class="s2">&quot;/home/tanmoymondal/Videos/FootBall_Video_Data_Server/&quot;</span>
+    <span class="c1"># ColorProcessing.generate_batch_background_image(all_dir_path)</span>
+    <span class="n">ColorProcessing</span><span class="o">.</span><span class="n">generate_batch_background_image_nils</span><span class="p">(</span><span class="n">all_dir_path</span><span class="p">)</span></div>
+
+
+    <span class="c1"># img_file_path = &quot;/home/tanmoymondal/Videos/FootBall_Video_Data_Server/5299/i_frames/58::-frame_8820.jpg&quot;</span>
+    <span class="c1"># ColorProcessing.apply_nils_background_removal_on_image(img_file_path)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="start_time">
+<a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_color_processing/index.html#video_processing_toolkit.utils.perform_color_processing.start_time">[docs]</a>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span></div>
+
+    <span class="n">main</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Done...Take </span><span class="si">{</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> (sec)&#39;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Alyssia Fourali, Loic Scoth, Mohamed Said Aimen Lamri, Gaspar Henniaux.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,34 +1,80 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>video_processing_toolkit.core &mdash; Video Processing Toolkit 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
-<html lang="en" data-content_root="../../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>video_processing_toolkit.core &#8212; Video Processing Toolkit 0.1.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <script src="../../_static/documentation_options.js?v=01f34227"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-   
-  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-  
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="../../index.html" class="icon icon-home">
+            Video Processing Toolkit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Video Processing Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Video Processing Toolkit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">video_processing_toolkit.core</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <h1>Source code for video_processing_toolkit.core</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -39,7 +85,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 
 <div class="viewcode-block" id="get_frame_types">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.get_frame_types">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.get_frame_types">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_frame_types</span><span class="p">(</span><span class="n">video_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to extract the type of each frame in a video using ffprobe</span>
@@ -61,7 +107,7 @@
 
 
 <div class="viewcode-block" id="save_all_i_keyframes">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.save_all_i_keyframes">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_i_keyframes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_i_keyframes</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract and save all I-frames of a complete video as image files.</span>
 <span class="sd">    Args:</span>
@@ -98,7 +144,7 @@
 
 
 <div class="viewcode-block" id="save_all_i_keyframes_between_two_timestamps">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.save_all_i_keyframes_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_i_keyframes_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_i_keyframes_between_two_timestamps</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract and save all the I-frames of a complete video as image files between two timestamps.</span>
 <span class="sd">    Args:</span>
@@ -164,7 +210,7 @@
 
 
 <div class="viewcode-block" id="save_all_p_keyframes">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.save_all_p_keyframes">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_p_keyframes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_p_keyframes</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all P-frames from a complete video as image files.</span>
 <span class="sd">    Args:</span>
@@ -201,7 +247,7 @@
 
 
 <div class="viewcode-block" id="save_all_p_keyframes_between_two_timestamps">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.save_all_p_keyframes_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_p_keyframes_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_p_keyframes_between_two_timestamps</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract  and save all the p-key frames of a complete video</span>
 <span class="sd">    Args:</span>
@@ -267,7 +313,7 @@
 
 
 <div class="viewcode-block" id="convert_video">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.convert_video">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.convert_video">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_video</span><span class="p">(</span><span class="n">inputed_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to convert the video file into .avi format and save it into current project directory</span>
 <span class="sd">    Args:</span>
@@ -287,7 +333,7 @@
 
 
 <div class="viewcode-block" id="compute_frame_per_sec_rate">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.compute_frame_per_sec_rate">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.compute_frame_per_sec_rate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_frame_per_sec_rate</span><span class="p">(</span><span class="n">video_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to compute the frame per seconds or pfs</span>
 <span class="sd">    Args:</span>
@@ -312,7 +358,7 @@
 
 
 <div class="viewcode-block" id="frames_to_video">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.frames_to_video">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.frames_to_video">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">frames_to_video</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function reads all the individual frames, saved in a directory and then use them to create a video</span>
 <span class="sd">    Args:</span>
@@ -343,7 +389,7 @@
 
 
 <div class="viewcode-block" id="video_to_all_frames">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.video_to_all_frames">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.video_to_all_frames">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">video_to_all_frames</span><span class="p">(</span><span class="n">input_loc</span><span class="p">,</span> <span class="n">output_loc</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all the frames from input video file</span>
 <span class="sd">    and save them as separate frames in an output directory.</span>
@@ -391,7 +437,7 @@
 
 
 <div class="viewcode-block" id="extract_images_regular_interval">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.extract_images_regular_interval">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_images_regular_interval">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_images_regular_interval</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">time_interval_in_sec</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract the frames in every given &quot;time_interval&quot; e.g. 1 sec, 5 sec etc. from input video file</span>
 <span class="sd">    and save them as separate frames in an output directory.</span>
@@ -427,7 +473,7 @@
 
 
 <div class="viewcode-block" id="extract_images_at_particular_timestamp">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.extract_images_at_particular_timestamp">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_images_at_particular_timestamp">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_images_at_particular_timestamp</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract the frame at a particular time stamp; Need to know the number of frames per second and the</span>
 <span class="sd">    timestamp in the video , we want to take frame from, we can easily calculate the frame number we want</span>
@@ -473,7 +519,7 @@
 
 
 <div class="viewcode-block" id="extract_images_between_two_timestamps">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.extract_images_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_images_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_images_between_two_timestamps</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all the frames within two timestamps; Need to know the number of frames per second and the</span>
 <span class="sd">    start and end timestamp in the video</span>
@@ -537,7 +583,7 @@
 
 
 <div class="viewcode-block" id="extract_regular_interval_images_between_two_timestamps">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.extract_regular_interval_images_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_regular_interval_images_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_regular_interval_images_between_two_timestamps</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">,</span>
                                                            <span class="n">time_interval_in_sec</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract frames after given regular intervals within two timestamps; Need to know the number of</span>
@@ -613,7 +659,7 @@
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../api/video_processing_toolkit.core.html#video_processing_toolkit.core.main">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.main">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is only a test&quot;</span><span class="p">)</span>
     <span class="n">input_loc</span> <span class="o">=</span> <span class="s1">&#39;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/0_37_56-0_52_0.mp4&#39;</span>
@@ -641,80 +687,40 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;PyTorch Template&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="parser">
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.parser">[docs]</a>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;PyTorch Template&#39;</span><span class="p">)</span></div>
+
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Alyssia Fourali, Loic Scoth, Mohamed Said Aimen Lamri, Gaspar Henniaux.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../index.html">Video Processing Toolkit</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Video Processing Toolkit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2025, Alyssia Fourali, Loic Scoth, Mohamed Said Aimen Lamri, Gaspar Henniaux.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
