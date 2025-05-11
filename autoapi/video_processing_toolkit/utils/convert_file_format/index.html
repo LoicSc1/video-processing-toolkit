@@ -104,21 +104,40 @@
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.to_numpy">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.to_numpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.to_numpy" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Converts a PyTorch tensor to a NumPy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tensor</strong> (<em>torch.Tensor</em><em> or </em><em>numpy.ndarray</em>) – The tensor to be converted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>The converted NumPy array if the input is a PyTorch tensor.</dt><dd><p>If the input is already a NumPy array, it is returned unchanged.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input is neither a PyTorch tensor nor a NumPy array.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.torch_var_to_numpy">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">torch_var_to_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor_var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.torch_var_to_numpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.torch_var_to_numpy" title="Link to this definition"></a></dt>
-<dd><p>Converts Tensor from a Pytorch tensor to a numpy array.</p>
+<dd><p>Converts a Pytorch tensor to a NumPy array with dimensions rearrangement.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tensor_var</strong> – (torch.Tensor) A Pytorch tensor. Normally a batch of 3D (Ch x Height x Width) images</p>
+<dd class="field-odd"><p><strong>tensor_var</strong> (<em>torch.Tensor</em>) – A Pytorch tensor. Normally a batch of 3D (Ch x Height x Width) images in the format (Batch, Channels, Height, Width).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(numpy.ndarray) The same tensor as a numpy array.</p>
+<dd class="field-even"><p>The tensor converted to a NumPy array with dimensions rearranged to (Batch, Height, Width, Channels).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np_tensor</p>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -126,16 +145,23 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.numpy_to_torch_var">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">numpy_to_torch_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">np_tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.numpy_to_torch_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.numpy_to_torch_var" title="Link to this definition"></a></dt>
-<dd><p>Converts Tensor from a numpy array to a Pytorch tensor.</p>
+<dd><p>Converts a NumPy array to a PyTorch tensor with appropriate dimension rearrangement.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>np_tensor</strong> – (numpy.ndarray) The same tensor as a numpy array.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>np_tensor</strong> (<em>numpy.ndarray</em>) – The NumPy array representing the tensor</p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – The device where the tensor will be stored.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(torch.Tensor) A Pytorch tensor.</p>
+<dd class="field-even"><p><dl class="simple">
+<dt>The equivalent Pytorch tensor with dimensions formatted as</dt><dd><p>(Batch, Channels, Height, Width).</p>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>var</p>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -144,18 +170,18 @@
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.permute_tensor_dims">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">permute_tensor_dims</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_var</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.permute_tensor_dims"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.permute_tensor_dims" title="Link to this definition"></a></dt>
 <dd><dl class="simple">
-<dt>This function implements the ToTensor class, without scaling the pixel values to the [0,1] range.</dt><dd><p>H x W x C -&gt; C x H x W</p>
+<dt>Rearranges the dimensions of a NumPy array for PyTorch compatibility.</dt><dd><p>H x W x C -&gt; C x H x W.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>input_var</strong> – (numpy.ndarray) The same tensor as a numpy array.</p>
+<dd class="field-odd"><p><strong>input_var</strong> (<em>numpy.ndarray</em>) – The NumPy array in the format (H, W, C).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>(torch.Tensor) A Pytorch tensor.</p>
+<dd class="field-even"><p>A Pytorch tensor in the format (C, H, W).</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>var</p>
+<dd class="field-odd"><p>torch.Tensor</p>
 </dd>
 </dl>
 </dd></dl>
@@ -163,24 +189,74 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.to_torch">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_torch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.to_torch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.to_torch" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Converts a NumPy array to a PyTorch tensor if it is not already a tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ndarray</strong> (<em>numpy.ndarray</em><em> or </em><em>torch.Tensor</em>) – The input data to be converted to a PyTorch tensor.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A PyTorch tensor. If the input is already a tensor, it is returned as is.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the input is neither a NumPy array nor a PyTorch tensor.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.im_to_numpy">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">im_to_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.im_to_numpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.im_to_numpy" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Converts an image from PyTorch tensor to a NumPy array in the standard image format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>torch.Tensor</em><em> or </em><em>numpy.ndarray</em>) – The image tensor or array.
+If it is a tensor, it must be in the format (C, H, W).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The image as a NumPy array in the format (H, W, C).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.im_to_torch">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">im_to_torch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.im_to_torch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.im_to_torch" title="Link to this definition"></a></dt>
-<dd><p>cv img [h, w, c]
-torch  [c, h, w]</p>
+<dd><p>Converts an image from OpenCV/Numpy format (H, W, C) to PyTorch format (C, H, W).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>numpy.ndarray</em>) – The image as a NumPy array with the format (H, W, C).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The image as a PyTorch tensor with the format (C, H, W).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.torch_to_img">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">torch_to_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/convert_file_format.html#ConvertFileFormat.torch_to_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.torch_to_img" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Converts a PyTorch tensor to a NumPy array in image format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>img</strong> (<em>torch.Tensor</em>) – The image tensor, typically in the format (C, H, W).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The image as a NumPy array in the format (H, W, C).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

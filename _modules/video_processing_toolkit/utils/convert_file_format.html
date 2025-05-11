@@ -91,6 +91,19 @@
 <div class="viewcode-block" id="ConvertFileFormat.to_numpy">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.to_numpy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_numpy</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a PyTorch tensor to a NumPy array.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tensor (torch.Tensor or numpy.ndarray): The tensor to be converted.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The converted NumPy array if the input is a PyTorch tensor.</span>
+<span class="sd">                        If the input is already a NumPy array, it is returned unchanged.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the input is neither a PyTorch tensor nor a NumPy array.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
         <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">tensor</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
         <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">!=</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span>
@@ -103,13 +116,12 @@
 <div class="viewcode-block" id="ConvertFileFormat.torch_var_to_numpy">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.torch_var_to_numpy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">torch_var_to_numpy</span><span class="p">(</span><span class="n">tensor_var</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Converts Tensor from a Pytorch tensor to a numpy array.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Converts a Pytorch tensor to a NumPy array with dimensions rearrangement.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            tensor_var: (torch.Tensor) A Pytorch tensor. Normally a batch of 3D (Ch x Height x Width) images</span>
-
+<span class="sd">            tensor_var (torch.Tensor): A Pytorch tensor. Normally a batch of 3D (Ch x Height x Width) images in the format (Batch, Channels, Height, Width).</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            np_tensor: (numpy.ndarray) The same tensor as a numpy array.</span>
+<span class="sd">            numpy.ndarray: The tensor converted to a NumPy array with dimensions rearranged to (Batch, Height, Width, Channels).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">tensor_var</span><span class="p">):</span>
             <span class="n">np_tensor</span> <span class="o">=</span> <span class="n">tensor_var</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
@@ -126,13 +138,14 @@
 <div class="viewcode-block" id="ConvertFileFormat.numpy_to_torch_var">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.numpy_to_torch_var">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">numpy_to_torch_var</span><span class="p">(</span><span class="n">np_tensor</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; Converts Tensor from a numpy array to a Pytorch tensor.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Converts a NumPy array to a PyTorch tensor with appropriate dimension rearrangement.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            np_tensor: (numpy.ndarray) The same tensor as a numpy array.</span>
-
+<span class="sd">            np_tensor (numpy.ndarray): The NumPy array representing the tensor</span>
+<span class="sd">            device (torch.device): The device where the tensor will be stored.</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            var: (torch.Tensor) A Pytorch tensor.</span>
+<span class="sd">            torch.Tensor: The equivalent Pytorch tensor with dimensions formatted as </span>
+<span class="sd">                          (Batch, Channels, Height, Width).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np_tensor</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">np_tensor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np_tensor</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -146,14 +159,13 @@
 <div class="viewcode-block" id="ConvertFileFormat.permute_tensor_dims">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.permute_tensor_dims">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">permute_tensor_dims</span><span class="p">(</span><span class="n">input_var</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; This function implements the ToTensor class, without scaling the pixel values to the [0,1] range.</span>
-<span class="sd">            H x W x C -&gt; C x H x W</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Rearranges the dimensions of a NumPy array for PyTorch compatibility.</span>
+<span class="sd">            H x W x C -&gt; C x H x W.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            input_var: (numpy.ndarray) The same tensor as a numpy array.</span>
-
+<span class="sd">            input_var (numpy.ndarray): The NumPy array in the format (H, W, C).</span>
 <span class="sd">        Returns:</span>
-<span class="sd">            var: (torch.Tensor) A Pytorch tensor.</span>
+<span class="sd">            torch.Tensor: A Pytorch tensor in the format (C, H, W).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">var</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">input_var</span><span class="p">))</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">var</span></div>
@@ -163,6 +175,17 @@
 <div class="viewcode-block" id="ConvertFileFormat.to_torch">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.to_torch">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_torch</span><span class="p">(</span><span class="n">ndarray</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a NumPy array to a PyTorch tensor if it is not already a tensor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ndarray (numpy.ndarray or torch.Tensor): The input data to be converted to a PyTorch tensor.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            torch.Tensor: A PyTorch tensor. If the input is already a tensor, it is returned as is.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the input is neither a NumPy array nor a PyTorch tensor.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ndarray</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="s1">&#39;numpy&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">ndarray</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">ndarray</span><span class="p">):</span>
@@ -175,6 +198,15 @@
 <div class="viewcode-block" id="ConvertFileFormat.im_to_numpy">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.im_to_numpy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">im_to_numpy</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts an image from PyTorch tensor to a NumPy array in the standard image format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            img (torch.Tensor or numpy.ndarray): The image tensor or array. </span>
+<span class="sd">                                                If it is a tensor, it must be in the format (C, H, W).</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The image as a NumPy array in the format (H, W, C).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">ConvertFileFormat</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># H*W*C</span>
         <span class="k">return</span> <span class="n">img</span></div>
@@ -185,8 +217,12 @@
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.im_to_torch">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">im_to_torch</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        cv img [h, w, c]</span>
-<span class="sd">        torch  [c, h, w]</span>
+<span class="sd">        Converts an image from OpenCV/Numpy format (H, W, C) to PyTorch format (C, H, W).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            img (numpy.ndarray): The image as a NumPy array with the format (H, W, C).</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            torch.Tensor: The image as a PyTorch tensor with the format (C, H, W).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># C*H*W</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">ConvertFileFormat</span><span class="o">.</span><span class="n">to_torch</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
@@ -197,6 +233,14 @@
 <div class="viewcode-block" id="ConvertFileFormat.torch_to_img">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/convert_file_format/index.html#video_processing_toolkit.utils.convert_file_format.ConvertFileFormat.torch_to_img">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">torch_to_img</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a PyTorch tensor to a NumPy array in image format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            img (torch.Tensor): The image tensor, typically in the format (C, H, W).</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The image as a NumPy array in the format (H, W, C).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">ConvertFileFormat</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># H*W*C</span>
         <span class="k">return</span> <span class="n">img</span></div>
