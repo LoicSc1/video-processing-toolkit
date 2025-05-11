@@ -136,12 +136,24 @@
 <div class="viewcode-block" id="decode_jpeg_fast">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_image_operation/index.html#video_processing_toolkit.utils.perform_image_operation.decode_jpeg_fast">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">decode_jpeg_fast</span><span class="p">(</span><span class="n">img_path</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Jpeg decoding method implemented by jpeg4py, available in</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+
+<span class="sd">    Decodes a JPEG image from the specified file path using the jpeg4py library.</span>
+
+<span class="sd">    This method leverages Jpeg decoding method implemented by jpeg4py, available in</span>
 <span class="sd">    https://github.com/ajkxyz/jpeg4py . This library binds the libjpeg-turbo</span>
 <span class="sd">    C++ library (available in</span>
 <span class="sd">    https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/BUILDING.md),</span>
 <span class="sd">    and can be up to 9 times faster than the non SIMD implementation.</span>
 <span class="sd">    Requires libjpeg-turbo, built and installed correctly.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_path (str): The file path to the JPEG image to be decoded.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: The decoded image as a NumPy array in the format (H, W, C).</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError: If the specified image path does not exist.</span>
+<span class="sd">        RuntimeError: If the decoding process fails (e.g., corrupted image).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">jpeg</span><span class="o">.</span><span class="n">JPEG</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span></div>
 
@@ -150,10 +162,26 @@
 <div class="viewcode-block" id="get_decode_jpeg_fcn">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_image_operation/index.html#video_processing_toolkit.utils.perform_image_operation.get_decode_jpeg_fcn">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_decode_jpeg_fcn</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="s1">&#39;fast&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Yields the function demanded by the user based on the flags given and</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the appropriate JPEG decoding function based on the specified flag.</span>
+
+<span class="sd">    This method yields the function demanded by the user based on the flags given and</span>
 <span class="sd">    the system responses to imports. If the demanded function is not</span>
 <span class="sd">    available an exception is raised and the user is informed it should try</span>
 <span class="sd">    using another flag.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        flag (str): The desired decoding mode. Must be either:</span>
+<span class="sd">            - &#39;fast&#39;: Uses `decode_jpeg_fast` (requires libjpeg-turbo).</span>
+<span class="sd">            - &#39;safe&#39;: Uses `imageio.imread` for standard decoding.</span>
+<span class="sd">            Default is &#39;fast&#39;.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        function: The selected decoding function (`decode_jpeg_fast` or `imageio.imread`).</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If the flag is set to &#39;fast&#39; but `libjpeg-turbo` is not available.</span>
+<span class="sd">        InvalidOption: If the provided flag is not valid. Valid options are:</span>
+<span class="sd">                       - &#39;fast&#39;</span>
+<span class="sd">                       - &#39;safe&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s1">&#39;fast&#39;</span><span class="p">:</span>
         <span class="k">assert</span> <span class="n">LIBJPEG_TURBO_PRESENT</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;[IMAGE-UTILS] Error: It seems that the &#39;</span>
@@ -183,13 +211,13 @@
 <span class="sd">    aligned.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        img: (numpy.ndarray) A numpy RGB image.</span>
-<span class="sd">        size_tup: (tuple) A 2D tuple containing the height and weight of the</span>
+<span class="sd">        img(numpy.ndarray): A numpy RGB image.</span>
+<span class="sd">        size_tup(tuple): A 2D tuple containing the height and weight of the</span>
 <span class="sd">            resized image.</span>
-<span class="sd">        interp: (str) The flag indicating the interpolation method. Available</span>
+<span class="sd">        interp(str): The flag indicating the interpolation method. Available</span>
 <span class="sd">            methods include &#39;bilinear&#39;, &#39;bicubic&#39; and &#39;nearest&#39;.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        img_res: (numpy.ndarray) The resized image</span>
+<span class="sd">        numpy.ndarray: The resized image.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The order of the size tuple is inverted in PIL compared to scipy</span>
     <span class="n">size_tup</span> <span class="o">=</span> <span class="p">(</span><span class="n">size_tup</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size_tup</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -205,10 +233,27 @@
 <div class="viewcode-block" id="get_resize_fcn">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_image_operation/index.html#video_processing_toolkit.utils.perform_image_operation.get_resize_fcn">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_resize_fcn</span><span class="p">(</span><span class="n">flag</span><span class="o">=</span><span class="s1">&#39;fast&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Yields the resize function demanded by the user based on the flags given</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the appropriate image resizing function based on the specified flag.</span>
+
+<span class="sd">    This method yields the resize function demanded by the user based on the flags given</span>
 <span class="sd">    and the system responses to imports. If the demanded function is not</span>
 <span class="sd">    available an exception is raised and the user is informed it should try</span>
 <span class="sd">    using another flag.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        flag (str): The desired resizing mode. Must be either:</span>
+<span class="sd">            - &#39;fast&#39;: Uses `resize_fast`, optimized for speed.</span>
+<span class="sd">            - &#39;safe&#39;: Uses `resize`, optimized for compatibility.</span>
+<span class="sd">            Default is &#39;fast&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        function: The selected resizing function (`resize_fast` or `resize`).</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidOption: If the provided flag is not valid. Valid options are:</span>
+<span class="sd">                       - &#39;fast&#39;</span>
+<span class="sd">                       - &#39;safe&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s1">&#39;fast&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">resize_fast</span>
@@ -229,7 +274,7 @@
 <span class="sd">    direction of the y indices.</span>
 
 <span class="sd">    Return:</span>
-<span class="sd">        pads: (dictionary) The padding in each direction.</span>
+<span class="sd">        dictionary: The padding in each direction.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">pads</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;up&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;down&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
     <span class="k">return</span> <span class="n">pads</span></div>
@@ -250,20 +295,17 @@
 <span class="sd">    region size always an odd integer as well, so to enforce this approach we</span>
 <span class="sd">    require the region size to be an odd integer.</span>
 
-
 <span class="sd">    Args:</span>
-<span class="sd">        img: (numpy.ndarray) The image to be cropped. Must be of dimensions</span>
+<span class="sd">        img(numpy.ndarray): The image to be cropped. Must be of dimensions</span>
 <span class="sd">            [height, width, channels]</span>
-<span class="sd">        cy: (int) The y coordinate of the center of the target.</span>
-<span class="sd">        cx: (int) The x coordinate of the center of the target.</span>
-<span class="sd">        reg_s: The side of the square region around the target, in pixels. Must</span>
+<span class="sd">        cy(int): The y coordinate of the center of the target.</span>
+<span class="sd">        cx(int): The x coordinate of the center of the target.</span>
+<span class="sd">        reg_s(int): The side of the square region around the target, in pixels. Must</span>
 <span class="sd">            be an odd integer.</span>
-
 <span class="sd">    Returns:</span>
-<span class="sd">        cropped_img: (numpy.ndarray) The cropped image.</span>
-<span class="sd">        pads: (dictionary) A dictionary with the amount of padding in pixels in</span>
-<span class="sd">            each side. The order is: up, down, left, right, or it can be</span>
-<span class="sd">            accessed by their names, e.g.: pads[&#39;up&#39;]</span>
+<span class="sd">        numpy.ndarray: The cropped image.</span>
+<span class="sd">        dictionary: A dictionary with the amount of padding in pixels in</span>
+<span class="sd">            each side. The order is: up, down, left, right, or it can be accessed by their names, e.g.: pads[&#39;up&#39;]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="n">reg_s</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;The region side must be an odd integer.&quot;</span>
     <span class="n">pads</span> <span class="o">=</span> <span class="n">pad_image</span><span class="p">()</span>
@@ -298,18 +340,17 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Resizes and pads the cropped image.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        cropped_img: (numpy.ndarray) The cropped image.</span>
-<span class="sd">        out_sz: (int) Output size, the desired size of the output.</span>
-<span class="sd">        pads: (dictionary) A dictionary of the amount of pad in each side of the</span>
+<span class="sd">        cropped_img(numpy.ndarray): The cropped image</span>
+<span class="sd">        out_sz(int): Output size, the desired size of the output</span>
+<span class="sd">        pads(dictionary): A dictionary of the amount of pad in each side of the</span>
 <span class="sd">            cropped image. They can be accessed by their names, e.g.: pads[&#39;up&#39;]</span>
-<span class="sd">        reg_s: (int) Optional: The region side, used to check that the crop size</span>
-<span class="sd">            plus the padding amount is equal to the region side in each axis.</span>
-<span class="sd">        use_avg: (bool) Indicates the mode of padding employed. If True, the</span>
-<span class="sd">            image is padded with the mean value, else it is padded with zeroes.</span>
-<span class="sd">        resize_fcn: The image resize function</span>
-
+<span class="sd">        reg_s(int): Optional: The region side, used to check that the crop size</span>
+<span class="sd">            plus the padding amount is equal to the region side in each axis</span>
+<span class="sd">        use_avg(bool): Indicates the mode of padding employed. If True, the</span>
+<span class="sd">            image is padded with the mean value, else it is padded with zeroes</span>
+<span class="sd">        resize_fcn: The image resize function.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        out_img: (numpy.ndarray) The output image, resized and padded. Has size</span>
+<span class="sd">        numpy.ndarray: The output image, resized and padded. Has size</span>
 <span class="sd">            (out_sz, out_sz).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># crop height and width</span>
@@ -361,6 +402,26 @@
                     <span class="n">border_type</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">BORDER_CONSTANT</span><span class="p">,</span>
                     <span class="n">border_value</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
                     <span class="n">interp</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_LINEAR</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crops a square region from the image centered at the specified coordinates </span>
+<span class="sd">    and resizes it to the desired output size. If the region exceeds the image </span>
+<span class="sd">    boundaries, padding is applied with the specified border type and color.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img (numpy.ndarray): The input image to be cropped and resized.</span>
+<span class="sd">        center (tuple): (x, y) coordinates of the center of the cropping region.</span>
+<span class="sd">        size (int): The size of the square region to crop around the center.</span>
+<span class="sd">        out_size (int): The size of the output cropped region after resizing.</span>
+<span class="sd">        border_type (int, optional): The type of border to add if padding is required.</span>
+<span class="sd">            Default is `cv2.BORDER_CONSTANT`.</span>
+<span class="sd">        border_value (tuple, optional): RGB color to use for padding if BORDER_CONSTANT is used.</span>
+<span class="sd">            Default is black (0, 0, 0).</span>
+<span class="sd">        interp (int, optional): Interpolation method for resizing.</span>
+<span class="sd">            Default is `cv2.INTER_LINEAR`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: The cropped and resized patch of the image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># convert box to corners (0-indexed)</span>
     <span class="n">size</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
     <span class="n">corners</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span>
@@ -397,19 +458,17 @@
 <span class="sd">    frame, it doesn&#39;t do anything.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        im: (numpy.ndarray) The image to be padded.</span>
-<span class="sd">        frame_sz: (tuple) The width and height of the frame in pixels.</span>
-<span class="sd">        pos_x: (int) The x coordinate of the center of the target in the frame.</span>
-<span class="sd">        pos_y: (int) The y coordinate of the center of the target in the frame.</span>
-<span class="sd">        path_sz: (int) The size of the patch corresponding to the context</span>
+<span class="sd">        im(numpy.ndarray): The image to be padded</span>
+<span class="sd">        frame_sz(tuple): The width and height of the frame in pixels.</span>
+<span class="sd">        pos_x(int): The x coordinate of the center of the target in the frame.</span>
+<span class="sd">        pos_y(int): The y coordinate of the center of the target in the frame.</span>
+<span class="sd">        path_sz(int): The size of the patch corresponding to the context</span>
 <span class="sd">            region around the bounding box.</span>
-<span class="sd">        use_avg: (bool) Indicates if we should pad with the mean value of the</span>
+<span class="sd">        use_avg(bool): Indicates if we should pad with the mean value of the</span>
 <span class="sd">            pixels in the image (True) or zero (False).</span>
-
 <span class="sd">    Returns:</span>
-<span class="sd">        im_padded: (numpy.ndarray) The image after the padding.</span>
-<span class="sd">        npad: (int) the amount of padding applied</span>
-
+<span class="sd">        numpy.ndarray: The image after the padding.</span>
+<span class="sd">        int: The amount of padding applied.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">patch_sz</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">xleft_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">pos_x</span> <span class="o">-</span> <span class="n">c</span><span class="p">))</span>
@@ -439,18 +498,16 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Extracts the reference patch from the image.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        im: (numpy.ndarray) The padded image.</span>
-<span class="sd">        npad: (int) The amount of padding added to each side.</span>
-<span class="sd">        pos_x: (int) The x coordinate of the center of the reference in the</span>
+<span class="sd">        im(numpy.ndarray): The padded image.</span>
+<span class="sd">        npad(int): The amount of padding added to each side.</span>
+<span class="sd">        pos_x(int): The x coordinate of the center of the reference in the</span>
 <span class="sd">            original frame, not considering the padding.</span>
-
-<span class="sd">        pos_y: (int) The y coordinate of the center of the reference in the</span>
+<span class="sd">        pos_y(int): The y coordinate of the center of the reference in the</span>
 <span class="sd">            original frame, not considering the padding.</span>
-<span class="sd">        sz_src: (int) The original size of the reference patch.</span>
-<span class="sd">        sz_dst: (int) The final size of the patch (usually 127)</span>
+<span class="sd">        sz_src(int): The original size of the reference patch.</span>
+<span class="sd">        sz_dst(int): The final size of the patch (usually 127).</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        crop: (numpy.ndarray) The cropped image containing the reference with its</span>
-<span class="sd">            context region.</span>
+<span class="sd">        numpy.ndarray: The cropped image containing the reference with its context region.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dist_to_side</span> <span class="o">=</span> <span class="n">sz_src</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="c1"># get top-left corner of bbox and consider padding</span>
@@ -474,20 +531,18 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Extracts the 3 scaled crops of the search patch from the image.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        im: (numpy.ndarray) The padded image.</span>
-<span class="sd">        npad: (int) The amount of padding added to each side.</span>
-<span class="sd">        pos_x: (int) The x coordinate of the center of the bounding box in the</span>
+<span class="sd">        im(numpy.ndarray): The padded image.</span>
+<span class="sd">        npad(int): The amount of padding added to each side.</span>
+<span class="sd">        pos_x(int): The x coordinate of the center of the bounding box in the</span>
 <span class="sd">            original frame, not considering the padding.</span>
-
-<span class="sd">        pos_y: (int) The y coordinate of the center of the bounding box in the</span>
+<span class="sd">        pos_y(int): The y coordinate of the center of the bounding box in the</span>
 <span class="sd">            original frame, not considering the padding.</span>
-<span class="sd">        sz_src0: (int) The downscaled size of the search region.</span>
-<span class="sd">        sz_src1: (int) The original size of the search region.</span>
-<span class="sd">        sz_src2: (int) The upscaled size of the search region.</span>
-<span class="sd">        sz_dst: (int) The final size for each crop (usually 255)</span>
+<span class="sd">        sz_src0(int): The downscaled size of the search region.</span>
+<span class="sd">        sz_src1(int): The original size of the search region.</span>
+<span class="sd">        sz_src2(int): The upscaled size of the search region.</span>
+<span class="sd">        sz_dst(int): The final size for each crop (usually 255)</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        crops: (numpy.ndarray) The 3 cropped images containing the search region</span>
-<span class="sd">        in 3 different scales.</span>
+<span class="sd">        numpy.ndarray: The 3 cropped images containing the search region in 3 different scales.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># take center of the biggest scaled source patch</span>
     <span class="n">dist_to_side</span> <span class="o">=</span> <span class="n">sz_src2</span> <span class="o">/</span> <span class="mi">2</span>
@@ -521,6 +576,17 @@
 <div class="viewcode-block" id="read_image">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_image_operation/index.html#video_processing_toolkit.utils.perform_image_operation.read_image">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">read_image</span><span class="p">(</span><span class="n">img_file</span><span class="p">,</span> <span class="n">cvt_code</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads an image from the specified file path.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img_file(str): The path to the image file.</span>
+<span class="sd">        cvt_code(int): OpenCV color conversion code.</span>
+<span class="sd">            Default is `cv2.COLOR_BGR2RGB`, which converts BGR to RGB.</span>
+<span class="sd">            Use `None` if no conversion is required.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: The image read and optionally converted.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_file</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">cvt_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cvt_code</span><span class="p">)</span>
@@ -533,6 +599,24 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">show_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">boxes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">box_fmt</span><span class="o">=</span><span class="s1">&#39;ltwh&#39;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                <span class="n">thickness</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fig_n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">visualize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                <span class="n">cvt_code</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Displays an image with optional bounding boxes. The image is resized if its</span>
+<span class="sd">    dimensions exceed 960 pixels. Bounding boxes can be drawn in either &#39;ltwh&#39;</span>
+<span class="sd">    (left, top, width, height) or &#39;ltrb&#39; (left, top, right, bottom) format.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        img(numpy.ndarray): The image to display.</span>
+<span class="sd">        boxes(list or numpy.ndarray, optional): List of bounding boxes to draw.</span>
+<span class="sd">        box_fmt(str, optional): Format of bounding boxes, &#39;ltwh&#39; or &#39;ltrb&#39;. Default is &#39;ltwh&#39;.</span>
+<span class="sd">        colors(list or numpy.ndarray, optional): List of colors for each box.</span>
+<span class="sd">        thickness(int, optional): Thickness of the bounding box lines.</span>
+<span class="sd">        fig_n(int, optional): Window number for OpenCV display.</span>
+<span class="sd">        delay(int, optional): Delay in milliseconds for `cv2.waitKey`. Default is 1 ms.</span>
+<span class="sd">        visualize(bool, optional): If True, the image is displayed with OpenCV.</span>
+<span class="sd">        cvt_code(int, optional): Color conversion code. Default is RGB to BGR.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: The image with bounding boxes drawn.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">cvt_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cvt_code</span><span class="p">)</span>
 

@@ -45,20 +45,47 @@ Module Contents
 
 .. py:function:: decode_jpeg_fast(img_path)
 
-   Jpeg decoding method implemented by jpeg4py, available in
+   Decodes a JPEG image from the specified file path using the jpeg4py library.
+
+   This method leverages Jpeg decoding method implemented by jpeg4py, available in
    https://github.com/ajkxyz/jpeg4py . This library binds the libjpeg-turbo
    C++ library (available in
    https://github.com/libjpeg-turbo/libjpeg-turbo/blob/master/BUILDING.md),
    and can be up to 9 times faster than the non SIMD implementation.
    Requires libjpeg-turbo, built and installed correctly.
 
+   :param img_path: The file path to the JPEG image to be decoded.
+   :type img_path: str
+
+   :returns: The decoded image as a NumPy array in the format (H, W, C).
+   :rtype: numpy.ndarray
+
+   :raises FileNotFoundError: If the specified image path does not exist.
+   :raises RuntimeError: If the decoding process fails (e.g., corrupted image).
+
 
 .. py:function:: get_decode_jpeg_fcn(flag='fast')
 
-   Yields the function demanded by the user based on the flags given and
+   Returns the appropriate JPEG decoding function based on the specified flag.
+
+   This method yields the function demanded by the user based on the flags given and
    the system responses to imports. If the demanded function is not
    available an exception is raised and the user is informed it should try
    using another flag.
+
+   :param flag: The desired decoding mode. Must be either:
+                - 'fast': Uses `decode_jpeg_fast` (requires libjpeg-turbo).
+                - 'safe': Uses `imageio.imread` for standard decoding.
+                Default is 'fast'.
+   :type flag: str
+
+   :returns: The selected decoding function (`decode_jpeg_fast` or `imageio.imread`).
+   :rtype: function
+
+   :raises AssertionError: If the flag is set to 'fast' but `libjpeg-turbo` is not available.
+   :raises InvalidOption: If the provided flag is not valid. Valid options are:
+       - 'fast'
+       - 'safe'
 
 
 .. py:function:: resize_fast(img, size_tup, interp='bilinear')
@@ -71,22 +98,40 @@ Module Contents
    is kept in the center (at least for the 4x upscale) and the corner pixels
    aligned.
 
-   :param img: (numpy.ndarray) A numpy RGB image.
-   :param size_tup: (tuple) A 2D tuple containing the height and weight of the
+   :param img: A numpy RGB image.
+   :type img: numpy.ndarray
+   :param size_tup: A 2D tuple containing the height and weight of the
                     resized image.
-   :param interp: (str) The flag indicating the interpolation method. Available
+   :type size_tup: tuple
+   :param interp: The flag indicating the interpolation method. Available
                   methods include 'bilinear', 'bicubic' and 'nearest'.
+   :type interp: str
 
-   :returns: (numpy.ndarray) The resized image
-   :rtype: img_res
+   :returns: The resized image.
+   :rtype: numpy.ndarray
 
 
 .. py:function:: get_resize_fcn(flag='fast')
 
-   Yields the resize function demanded by the user based on the flags given
+   Returns the appropriate image resizing function based on the specified flag.
+
+   This method yields the resize function demanded by the user based on the flags given
    and the system responses to imports. If the demanded function is not
    available an exception is raised and the user is informed it should try
    using another flag.
+
+   :param flag: The desired resizing mode. Must be either:
+                - 'fast': Uses `resize_fast`, optimized for speed.
+                - 'safe': Uses `resize`, optimized for compatibility.
+                Default is 'fast'.
+   :type flag: str
+
+   :returns: The selected resizing function (`resize_fast` or `resize`).
+   :rtype: function
+
+   :raises InvalidOption: If the provided flag is not valid. Valid options are:
+       - 'fast'
+       - 'safe'
 
 
 .. py:function:: pad_image()
@@ -96,8 +141,8 @@ Module Contents
    is up in relation to the displayed image, thus it represent the negative
    direction of the y indices.
 
-   :returns: (dictionary) The padding in each direction.
-   :rtype: pads
+   :returns: The padding in each direction.
+   :rtype: dictionary
 
 
 .. py:function:: crop_img(img, cy, cx, reg_s)
@@ -113,43 +158,76 @@ Module Contents
    region size always an odd integer as well, so to enforce this approach we
    require the region size to be an odd integer.
 
-
-   :param img: (numpy.ndarray) The image to be cropped. Must be of dimensions
+   :param img: The image to be cropped. Must be of dimensions
                [height, width, channels]
-   :param cy: (int) The y coordinate of the center of the target.
-   :param cx: (int) The x coordinate of the center of the target.
+   :type img: numpy.ndarray
+   :param cy: The y coordinate of the center of the target.
+   :type cy: int
+   :param cx: The x coordinate of the center of the target.
+   :type cx: int
    :param reg_s: The side of the square region around the target, in pixels. Must
                  be an odd integer.
+   :type reg_s: int
 
-   :returns: (numpy.ndarray) The cropped image.
-             pads: (dictionary) A dictionary with the amount of padding in pixels in
-                 each side. The order is: up, down, left, right, or it can be
-                 accessed by their names, e.g.: pads['up']
-   :rtype: cropped_img
+   :returns: The cropped image.
+             dictionary: A dictionary with the amount of padding in pixels in
+                 each side. The order is: up, down, left, right, or it can be accessed by their names, e.g.: pads['up']
+   :rtype: numpy.ndarray
 
 
 .. py:function:: resize_and_pad(cropped_img, out_sz, pads, reg_s=None, use_avg=True, resize_fcn=resize)
 
    Resizes and pads the cropped image.
 
-   :param cropped_img: (numpy.ndarray) The cropped image.
-   :param out_sz: (int) Output size, the desired size of the output.
-   :param pads: (dictionary) A dictionary of the amount of pad in each side of the
+   :param cropped_img: The cropped image
+   :type cropped_img: numpy.ndarray
+   :param out_sz: Output size, the desired size of the output
+   :type out_sz: int
+   :param pads: A dictionary of the amount of pad in each side of the
                 cropped image. They can be accessed by their names, e.g.: pads['up']
-   :param reg_s: (int) Optional: The region side, used to check that the crop size
-                 plus the padding amount is equal to the region side in each axis.
-   :param use_avg: (bool) Indicates the mode of padding employed. If True, the
-                   image is padded with the mean value, else it is padded with zeroes.
-   :param resize_fcn: The image resize function
+   :type pads: dictionary
+   :param reg_s: Optional: The region side, used to check that the crop size
+                 plus the padding amount is equal to the region side in each axis
+   :type reg_s: int
+   :param use_avg: Indicates the mode of padding employed. If True, the
+                   image is padded with the mean value, else it is padded with zeroes
+   :type use_avg: bool
+   :param resize_fcn: The image resize function.
 
    :returns:
 
-             (numpy.ndarray) The output image, resized and padded. Has size
+             The output image, resized and padded. Has size
                  (out_sz, out_sz).
-   :rtype: out_img
+   :rtype: numpy.ndarray
 
 
 .. py:function:: crop_and_resize(img, center, size, out_size, border_type=cv2.BORDER_CONSTANT, border_value=(0, 0, 0), interp=cv2.INTER_LINEAR)
+
+   Crops a square region from the image centered at the specified coordinates
+   and resizes it to the desired output size. If the region exceeds the image
+   boundaries, padding is applied with the specified border type and color.
+
+   :param img: The input image to be cropped and resized.
+   :type img: numpy.ndarray
+   :param center: (x, y) coordinates of the center of the cropping region.
+   :type center: tuple
+   :param size: The size of the square region to crop around the center.
+   :type size: int
+   :param out_size: The size of the output cropped region after resizing.
+   :type out_size: int
+   :param border_type: The type of border to add if padding is required.
+                       Default is `cv2.BORDER_CONSTANT`.
+   :type border_type: int, optional
+   :param border_value: RGB color to use for padding if BORDER_CONSTANT is used.
+                        Default is black (0, 0, 0).
+   :type border_value: tuple, optional
+   :param interp: Interpolation method for resizing.
+                  Default is `cv2.INTER_LINEAR`.
+   :type interp: int, optional
+
+   :returns: The cropped and resized patch of the image.
+   :rtype: numpy.ndarray
+
 
 .. py:function:: pad_frame(im, frame_sz, pos_x, pos_y, patch_sz, use_avg=True)
 
@@ -157,61 +235,117 @@ Module Contents
    patch_sz centered in (pos_x, pos_y). If the region is already inside the
    frame, it doesn't do anything.
 
-   :param im: (numpy.ndarray) The image to be padded.
-   :param frame_sz: (tuple) The width and height of the frame in pixels.
-   :param pos_x: (int) The x coordinate of the center of the target in the frame.
-   :param pos_y: (int) The y coordinate of the center of the target in the frame.
-   :param path_sz: (int) The size of the patch corresponding to the context
+   :param im: The image to be padded
+   :type im: numpy.ndarray
+   :param frame_sz: The width and height of the frame in pixels.
+   :type frame_sz: tuple
+   :param pos_x: The x coordinate of the center of the target in the frame.
+   :type pos_x: int
+   :param pos_y: The y coordinate of the center of the target in the frame.
+   :type pos_y: int
+   :param path_sz: The size of the patch corresponding to the context
                    region around the bounding box.
-   :param use_avg: (bool) Indicates if we should pad with the mean value of the
+   :type path_sz: int
+   :param use_avg: Indicates if we should pad with the mean value of the
                    pixels in the image (True) or zero (False).
+   :type use_avg: bool
 
-   :returns: (numpy.ndarray) The image after the padding.
-             npad: (int) the amount of padding applied
-   :rtype: im_padded
+   :returns: The image after the padding.
+             int: The amount of padding applied.
+   :rtype: numpy.ndarray
 
 
 .. py:function:: extract_crops_z(im, npad, pos_x, pos_y, sz_src, sz_dst)
 
    Extracts the reference patch from the image.
 
-   :param im: (numpy.ndarray) The padded image.
-   :param npad: (int) The amount of padding added to each side.
-   :param pos_x: (int) The x coordinate of the center of the reference in the
+   :param im: The padded image.
+   :type im: numpy.ndarray
+   :param npad: The amount of padding added to each side.
+   :type npad: int
+   :param pos_x: The x coordinate of the center of the reference in the
                  original frame, not considering the padding.
-   :param pos_y: (int) The y coordinate of the center of the reference in the
+   :type pos_x: int
+   :param pos_y: The y coordinate of the center of the reference in the
                  original frame, not considering the padding.
-   :param sz_src: (int) The original size of the reference patch.
-   :param sz_dst: (int) The final size of the patch (usually 127)
+   :type pos_y: int
+   :param sz_src: The original size of the reference patch.
+   :type sz_src: int
+   :param sz_dst: The final size of the patch (usually 127).
+   :type sz_dst: int
 
-   :returns:
-
-             (numpy.ndarray) The cropped image containing the reference with its
-                 context region.
-   :rtype: crop
+   :returns: The cropped image containing the reference with its context region.
+   :rtype: numpy.ndarray
 
 
 .. py:function:: extract_crops_x(im, npad, pos_x, pos_y, sz_src0, sz_src1, sz_src2, sz_dst)
 
    Extracts the 3 scaled crops of the search patch from the image.
 
-   :param im: (numpy.ndarray) The padded image.
-   :param npad: (int) The amount of padding added to each side.
-   :param pos_x: (int) The x coordinate of the center of the bounding box in the
+   :param im: The padded image.
+   :type im: numpy.ndarray
+   :param npad: The amount of padding added to each side.
+   :type npad: int
+   :param pos_x: The x coordinate of the center of the bounding box in the
                  original frame, not considering the padding.
-   :param pos_y: (int) The y coordinate of the center of the bounding box in the
+   :type pos_x: int
+   :param pos_y: The y coordinate of the center of the bounding box in the
                  original frame, not considering the padding.
-   :param sz_src0: (int) The downscaled size of the search region.
-   :param sz_src1: (int) The original size of the search region.
-   :param sz_src2: (int) The upscaled size of the search region.
-   :param sz_dst: (int) The final size for each crop (usually 255)
+   :type pos_y: int
+   :param sz_src0: The downscaled size of the search region.
+   :type sz_src0: int
+   :param sz_src1: The original size of the search region.
+   :type sz_src1: int
+   :param sz_src2: The upscaled size of the search region.
+   :type sz_src2: int
+   :param sz_dst: The final size for each crop (usually 255)
+   :type sz_dst: int
 
-   :returns: (numpy.ndarray) The 3 cropped images containing the search region
-             in 3 different scales.
-   :rtype: crops
+   :returns: The 3 cropped images containing the search region in 3 different scales.
+   :rtype: numpy.ndarray
 
 
 .. py:function:: read_image(img_file, cvt_code=cv2.COLOR_BGR2RGB)
 
+   Reads an image from the specified file path.
+
+   :param img_file: The path to the image file.
+   :type img_file: str
+   :param cvt_code: OpenCV color conversion code.
+                    Default is `cv2.COLOR_BGR2RGB`, which converts BGR to RGB.
+                    Use `None` if no conversion is required.
+   :type cvt_code: int
+
+   :returns: The image read and optionally converted.
+   :rtype: numpy.ndarray
+
+
 .. py:function:: show_image(img, boxes=None, box_fmt='ltwh', colors=None, thickness=3, fig_n=1, delay=1, visualize=True, cvt_code=cv2.COLOR_RGB2BGR)
+
+   Displays an image with optional bounding boxes. The image is resized if its
+   dimensions exceed 960 pixels. Bounding boxes can be drawn in either 'ltwh'
+   (left, top, width, height) or 'ltrb' (left, top, right, bottom) format.
+
+   :param img: The image to display.
+   :type img: numpy.ndarray
+   :param boxes: List of bounding boxes to draw.
+   :type boxes: list or numpy.ndarray, optional
+   :param box_fmt: Format of bounding boxes, 'ltwh' or 'ltrb'. Default is 'ltwh'.
+   :type box_fmt: str, optional
+   :param colors: List of colors for each box.
+   :type colors: list or numpy.ndarray, optional
+   :param thickness: Thickness of the bounding box lines.
+   :type thickness: int, optional
+   :param fig_n: Window number for OpenCV display.
+   :type fig_n: int, optional
+   :param delay: Delay in milliseconds for `cv2.waitKey`. Default is 1 ms.
+   :type delay: int, optional
+   :param visualize: If True, the image is displayed with OpenCV.
+   :type visualize: bool, optional
+   :param cvt_code: Color conversion code. Default is RGB to BGR.
+   :type cvt_code: int, optional
+
+   :returns: The image with bounding boxes drawn.
+   :rtype: numpy.ndarray
+
 
