@@ -15,14 +15,14 @@ Module Contents
       :staticmethod:
 
 
-      Function to actually cut the video clips
+      Function to actually cut the video clips.
+
       :param input_filename: Path of the input video file
       :param output_filename: The path of the output file clip
       :param start_time: The start time stamp
-      :param end_time: The end time stamp
+      :param end_time: The end time stamp.
 
-      Returns:
-
+      :returns: None
 
 
 
@@ -31,14 +31,14 @@ Module Contents
 
 
       Function to read several start and end time stamps, mentioned in two vectors; "time_stamp_start_1" and
-      "time_stamp_end_1", to crop the video clips based on these start and end time stamps
+      "time_stamp_end_1", to crop the video clips based on these start and end time stamps.
+
       :param input_filename: Path of the input video file
       :param output_file_path: The path of the output file clip
       :param time_stamp_start_1: The list of start time in HH:MM:SS format
-      :param time_stamp_end_1: The list of end time in HH:MM:SS format
+      :param time_stamp_end_1: The list of end time in HH:MM:SS format.
 
-      Returns:
-
+      :returns: None
 
 
 
@@ -46,14 +46,27 @@ Module Contents
       :staticmethod:
 
 
+      Performs field segmentation on the given image frame, applying a color-based mask
+      to isolate regions with specific hue values, typically representing green field areas.
+
+      :param frame: The input image as a NumPy array in BGR color format.
+      :type frame: np.ndarray
+
+      :returns:
+
+                A NumPy array representing the masked image where only the segmented
+                        field regions are preserved, and the rest is filtered out.
+      :rtype: np.ndarray
+
+
 
    .. py:method:: process_input_video_give_video_output(input_loc, output_loc, function_to_apply)
       :staticmethod:
 
 
-      Function to apply the processing on each frames from input video file
-      and create another video
-      :param input_loc: Input video file.
+      Function to apply the processing on each frames from input video file and create another video.
+
+      :param input_loc: Input video file
       :param output_loc: The path of output video file
       :param function_to_apply: The function in which the processing will be applied. Remember, this function should
       :param take opencv frame i.e. a numpy array:
@@ -62,8 +75,6 @@ Module Contents
       Example usage :
           process_input_video_give_video_output("input_video_path", "output_video_path",
           handlle_nils_field_segmentation)
-
-
       :returns: None
 
 

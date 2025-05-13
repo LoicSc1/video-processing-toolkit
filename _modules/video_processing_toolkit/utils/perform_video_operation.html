@@ -102,21 +102,22 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">VideoOperation</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; I am inside init function of test file &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Video Operation class &quot;</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
 <div class="viewcode-block" id="VideoOperation.get_clip">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_video_operation/index.html#video_processing_toolkit.utils.perform_video_operation.VideoOperation.get_clip">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_clip</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_filename</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Function to actually cut the video clips</span>
+<span class="sd">        Function to actually cut the video clips.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            input_filename: Path of the input video file</span>
 <span class="sd">            output_filename: The path of the output file clip</span>
 <span class="sd">            start_time: The start time stamp</span>
-<span class="sd">            end_time: The end time stamp</span>
+<span class="sd">            end_time: The end time stamp.</span>
 <span class="sd">        Returns:</span>
-
+<span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ffmpeg_extract_subclip</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">,</span> <span class="n">targetname</span><span class="o">=</span><span class="n">output_filename</span><span class="p">)</span></div>
 
@@ -125,17 +126,17 @@
 <div class="viewcode-block" id="VideoOperation.cut_video_clips">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_video_operation/index.html#video_processing_toolkit.utils.perform_video_operation.VideoOperation.cut_video_clips">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">cut_video_clips</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_file_path</span><span class="p">,</span> <span class="n">time_stamp_start_1</span><span class="p">,</span> <span class="n">time_stamp_end_1</span><span class="p">):</span>
-
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function to read several start and end time stamps, mentioned in two vectors; &quot;time_stamp_start_1&quot; and</span>
-<span class="sd">        &quot;time_stamp_end_1&quot;, to crop the video clips based on these start and end time stamps</span>
+<span class="sd">        &quot;time_stamp_end_1&quot;, to crop the video clips based on these start and end time stamps.</span>
+
 <span class="sd">        Args:</span>
 <span class="sd">            input_filename: Path of the input video file</span>
 <span class="sd">            output_file_path: The path of the output file clip</span>
 <span class="sd">            time_stamp_start_1 : The list of start time in HH:MM:SS format</span>
-<span class="sd">            time_stamp_end_1 : The list of end time in HH:MM:SS format</span>
+<span class="sd">            time_stamp_end_1 : The list of end time in HH:MM:SS format.</span>
 <span class="sd">        Returns:</span>
-
+<span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_stamp_start_1</span><span class="p">)):</span>
             <span class="n">get_clip_start_time</span> <span class="o">=</span> <span class="n">time_stamp_start_1</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span>
@@ -167,7 +168,16 @@
 <div class="viewcode-block" id="VideoOperation.handlle_nils_field_segmentation">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_video_operation/index.html#video_processing_toolkit.utils.perform_video_operation.VideoOperation.handlle_nils_field_segmentation">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">handlle_nils_field_segmentation</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs field segmentation on the given image frame, applying a color-based mask</span>
+<span class="sd">        to isolate regions with specific hue values, typically representing green field areas.</span>
 
+<span class="sd">        Args:</span>
+<span class="sd">            frame (np.ndarray): The input image as a NumPy array in BGR color format.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A NumPy array representing the masked image where only the segmented</span>
+<span class="sd">                    field regions are preserved, and the rest is filtered out.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">segmentation_node</span> <span class="o">=</span> <span class="n">FieldSegmentation</span><span class="p">()</span>
         <span class="n">segmentation_node</span><span class="o">.</span><span class="n">border_size</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">segmentation_node</span><span class="o">.</span><span class="n">blur_size</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
@@ -194,20 +204,16 @@
 <div class="viewcode-block" id="VideoOperation.process_input_video_give_video_output">
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/perform_video_operation/index.html#video_processing_toolkit.utils.perform_video_operation.VideoOperation.process_input_video_give_video_output">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_input_video_give_video_output</span><span class="p">(</span><span class="n">input_loc</span><span class="p">,</span> <span class="n">output_loc</span><span class="p">,</span> <span class="n">function_to_apply</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to apply the processing on each frames from input video file</span>
-<span class="sd">        and create another video</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to apply the processing on each frames from input video file and create another video.</span>
+
 <span class="sd">        Args:</span>
-<span class="sd">            input_loc: Input video file.</span>
+<span class="sd">            input_loc: Input video file</span>
 <span class="sd">            output_loc: The path of output video file</span>
-
 <span class="sd">            function_to_apply : The function in which the processing will be applied. Remember, this function should</span>
-<span class="sd">            take opencv frame i.e. a numpy array (nd.array) as the input and will return the same i.e. a numpy array</span>
-
+<span class="sd">            take opencv frame i.e. a numpy array (nd.array) as the input and will return the same i.e. a numpy array.</span>
 <span class="sd">        Example usage :</span>
 <span class="sd">            process_input_video_give_video_output(&quot;input_video_path&quot;, &quot;output_video_path&quot;,</span>
 <span class="sd">            handlle_nils_field_segmentation)</span>
-
-
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>

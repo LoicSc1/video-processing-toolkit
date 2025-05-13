@@ -104,41 +104,78 @@
 <dd><dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.perform_video_operation.VideoOperation.get_clip">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_clip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/perform_video_operation.html#VideoOperation.get_clip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.perform_video_operation.VideoOperation.get_clip" title="Link to this definition"></a></dt>
-<dd><p>Function to actually cut the video clips
-:param input_filename: Path of the input video file
-:param output_filename: The path of the output file clip
-:param start_time: The start time stamp
-:param end_time: The end time stamp</p>
-<p>Returns:</p>
+<dd><p>Function to actually cut the video clips.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_filename</strong> – Path of the input video file</p></li>
+<li><p><strong>output_filename</strong> – The path of the output file clip</p></li>
+<li><p><strong>start_time</strong> – The start time stamp</p></li>
+<li><p><strong>end_time</strong> – The end time stamp.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.perform_video_operation.VideoOperation.cut_video_clips">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cut_video_clips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_stamp_start_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_stamp_end_1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/perform_video_operation.html#VideoOperation.cut_video_clips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.perform_video_operation.VideoOperation.cut_video_clips" title="Link to this definition"></a></dt>
 <dd><p>Function to read several start and end time stamps, mentioned in two vectors; “time_stamp_start_1” and
-“time_stamp_end_1”, to crop the video clips based on these start and end time stamps
-:param input_filename: Path of the input video file
-:param output_file_path: The path of the output file clip
-:param time_stamp_start_1: The list of start time in HH:MM:SS format
-:param time_stamp_end_1: The list of end time in HH:MM:SS format</p>
-<p>Returns:</p>
+“time_stamp_end_1”, to crop the video clips based on these start and end time stamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_filename</strong> – Path of the input video file</p></li>
+<li><p><strong>output_file_path</strong> – The path of the output file clip</p></li>
+<li><p><strong>time_stamp_start_1</strong> – The list of start time in HH:MM:SS format</p></li>
+<li><p><strong>time_stamp_end_1</strong> – The list of end time in HH:MM:SS format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.perform_video_operation.VideoOperation.handlle_nils_field_segmentation">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handlle_nils_field_segmentation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/perform_video_operation.html#VideoOperation.handlle_nils_field_segmentation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.perform_video_operation.VideoOperation.handlle_nils_field_segmentation" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Performs field segmentation on the given image frame, applying a color-based mask
+to isolate regions with specific hue values, typically representing green field areas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>frame</strong> (<em>np.ndarray</em>) – The input image as a NumPy array in BGR color format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A NumPy array representing the masked image where only the segmented</dt><dd><p>field regions are preserved, and the rest is filtered out.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.perform_video_operation.VideoOperation.process_input_video_give_video_output">
 <em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process_input_video_give_video_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_loc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_loc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">function_to_apply</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/utils/perform_video_operation.html#VideoOperation.process_input_video_give_video_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.perform_video_operation.VideoOperation.process_input_video_give_video_output" title="Link to this definition"></a></dt>
-<dd><p>Function to apply the processing on each frames from input video file
-and create another video
-:param input_loc: Input video file.
-:param output_loc: The path of output video file
-:param function_to_apply: The function in which the processing will be applied. Remember, this function should
-:param take opencv frame i.e. a numpy array:
-:type take opencv frame i.e. a numpy array: nd.array</p>
+<dd><p>Function to apply the processing on each frames from input video file and create another video.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_loc</strong> – Input video file</p></li>
+<li><p><strong>output_loc</strong> – The path of output video file</p></li>
+<li><p><strong>function_to_apply</strong> – The function in which the processing will be applied. Remember, this function should</p></li>
+<li><p><strong>array</strong> (<em>take opencv frame i.e. a numpy</em>)</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="simple">
 <dt>Example usage :</dt><dd><p>process_input_video_give_video_output(“input_video_path”, “output_video_path”,
 handlle_nils_field_segmentation)</p>
