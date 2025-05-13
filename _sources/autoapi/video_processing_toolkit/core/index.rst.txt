@@ -6,8 +6,6 @@ video_processing_toolkit.core
 
 
 
-
-
 Module Contents
 ---------------
 
@@ -202,8 +200,4 @@ Module Contents
 
    :returns: None
 
-
-.. py:function:: main()
-
-.. py:data:: parser
 

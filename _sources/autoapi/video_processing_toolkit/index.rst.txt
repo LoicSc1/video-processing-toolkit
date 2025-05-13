@@ -23,8 +23,6 @@ Submodules
 
 
 
-
-
 Package Contents
 ----------------
 
@@ -219,8 +217,4 @@ Package Contents
 
    :returns: None
 
-
-.. py:function:: main()
-
-.. py:data:: parser
 

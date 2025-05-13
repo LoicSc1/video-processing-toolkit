@@ -661,44 +661,6 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done extracting frames.</span><span class="se">\n</span><span class="si">%d</span><span class="s2"> frames extracted&quot;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span></div>
 
     <span class="c1"># break</span>
-
-
-<div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.main">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is only a test&quot;</span><span class="p">)</span>
-    <span class="n">input_loc</span> <span class="o">=</span> <span class="s1">&#39;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/0_37_56-0_52_0.mp4&#39;</span>
-    <span class="n">output_loc_1</span> <span class="o">=</span> <span class="s1">&#39;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/save_all_frames/&#39;</span>
-
-    <span class="n">output_loc_2</span> <span class="o">=</span> <span class="s1">&#39;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/save_frames_regular_time_interval/&#39;</span>
-    <span class="n">output_loc_3</span> <span class="o">=</span> <span class="s1">&#39;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/save_image_particular_timestamp/&#39;</span>
-    <span class="n">output_loc_4</span> <span class="o">=</span> <span class="s2">&quot;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/save_frames_between_timestamps/&quot;</span>
-    <span class="n">output_loc_5</span> <span class="o">=</span> <span class="s2">&quot;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/save_frames_bet_tstamps_regular_interval/&quot;</span>
-    <span class="n">output_loc_6</span> <span class="o">=</span> <span class="s2">&quot;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/save_all_i_frames/&quot;</span>
-    <span class="n">output_loc_7</span> <span class="o">=</span> <span class="s2">&quot;/home/tanmoymondal/Videos/FootBall_Video_Data/669/clips/save_all_p_frames/&quot;</span>
-
-    <span class="c1"># video_to_all_frames(input_loc, output_loc_1)  # WORKING</span>
-    <span class="c1"># extract_images_regular_interval(input_loc, output_loc_2, 5)  # WORKING</span>
-    <span class="c1"># extract_images_at_particular_timestamp(input_loc, output_loc_3, &quot;00:09:40&quot;)  # WORKING</span>
-    <span class="c1"># extract_images_between_two_timestamps(input_loc, output_loc_4, &quot;00:05:30&quot;, &quot;00:09:40&quot;)  # WORKING</span>
-    <span class="c1"># extract_regular_interval_images_between_two_timestamps(input_loc, output_loc_5, &quot;00:05:30&quot;, &quot;00:09:40&quot;, 5)</span>
-    <span class="c1"># frames_to_video(input_loc, output_loc)</span>
-
-    <span class="c1"># save_all_i_keyframes(input_loc, output_loc_6)</span>
-    <span class="n">save_all_i_keyframes_between_two_timestamps</span><span class="p">(</span><span class="n">input_loc</span><span class="p">,</span> <span class="n">output_loc_6</span><span class="p">,</span> <span class="s2">&quot;00:05:30&quot;</span><span class="p">,</span> <span class="s2">&quot;00:09:40&quot;</span><span class="p">)</span></div>
-
-
-    <span class="c1"># save_all_p_keyframes(input_loc, output_loc_7)</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<div class="viewcode-block" id="parser">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.parser">[docs]</a>
-    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;PyTorch Template&#39;</span><span class="p">)</span></div>
-
-
-    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
            </div>
