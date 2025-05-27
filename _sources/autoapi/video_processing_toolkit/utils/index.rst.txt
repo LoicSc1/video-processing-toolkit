@@ -13,7 +13,6 @@ Submodules
    /autoapi/video_processing_toolkit/utils/convert_file_format/index
    /autoapi/video_processing_toolkit/utils/exceptions/index
    /autoapi/video_processing_toolkit/utils/object_track_bbox/index
-   /autoapi/video_processing_toolkit/utils/perform_color_processing/index
    /autoapi/video_processing_toolkit/utils/perform_image_operation/index
    /autoapi/video_processing_toolkit/utils/perform_video_operation/index
    /autoapi/video_processing_toolkit/utils/plot_data/index
