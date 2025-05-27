@@ -1,0 +1,7 @@
+video\_processing\_toolkit.utils.plot\_data module
+==================================================
+
+.. automodule:: video_processing_toolkit.utils.plot_data
+   :members:
+   :show-inheritance:
+   :undoc-members:

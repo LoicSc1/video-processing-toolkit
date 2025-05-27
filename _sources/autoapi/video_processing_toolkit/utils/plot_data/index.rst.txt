@@ -1,0 +1,170 @@
+video_processing_toolkit.utils.plot_data
+========================================
+
+.. py:module:: video_processing_toolkit.utils.plot_data
+
+
+
+
+Module Contents
+---------------
+
+.. py:class:: PlotData
+
+   .. py:method:: simple_histogram_plot(get_data, n_bins, y_label, x_label)
+      :staticmethod:
+
+
+      Plots a simple normalized histogram from the given data.
+
+      The histogram shows the distribution of values using the specified number of bins,
+      and displays probability density (not raw counts).
+
+      :param get_data: The data to be plotted.
+      :type get_data: array-like
+      :param n_bins: Number of bins to divide the data into.
+      :type n_bins: int
+      :param y_label: Label for the y-axis.
+      :type y_label: str
+      :param x_label: Label for the x-axis.
+      :type x_label: str
+
+      :returns: None
+
+
+
+   .. py:method:: simple_gaussian_histogram_plot(get_data, n_bins, y_label, x_label)
+      :staticmethod:
+
+
+      Displays a histogram with a Gaussian-like kernel density estimate (KDE) overlay.
+
+      :param get_data: The data to be plotted.
+      :type get_data: array-like
+      :param n_bins: Number of bins to divide the data into for the histogram.
+      :type n_bins: int
+      :param y_label: Label for the y-axis.
+      :type y_label: str
+      :param x_label: Label for the x-axis.
+      :type x_label: str
+
+      :returns: None
+
+
+
+   .. py:method:: simple_plot_four_curves(var_x, var_y, var_z, var_k, var_p, title_string, leg_1, leg_2, leg_3, leg_4, full_plot_save_path, y_label, x_label, custom_y_lim=(0, 1), plot_loc='upper left')
+      :staticmethod:
+
+
+      Plots four curves on the same figure and saves the plot as an image.
+
+      This function draws four Y-series against a common X-axis, adds labels, title, legend,
+      and grid, and saves the figure to the specified path.
+
+      :param var_x: The X-axis values shared by all curves.
+      :type var_x: array-like
+      :param var_y: Y-values for the first curve.
+      :type var_y: array-like
+      :param var_z: Y-values for the second curve.
+      :type var_z: array-like
+      :param var_k: Y-values for the third curve.
+      :type var_k: array-like
+      :param var_p: Y-values for the fourth curve.
+      :type var_p: array-like
+      :param title_string: Title of the plot.
+      :type title_string: str
+      :param leg_1: Legend label for the first curve.
+      :type leg_1: str
+      :param leg_2: Legend label for the second curve.
+      :type leg_2: str
+      :param leg_3: Legend label for the third curve.
+      :type leg_3: str
+      :param leg_4: Legend label for the fourth curve.
+      :type leg_4: str
+      :param full_plot_save_path: Path to save the resulting plot image.
+      :type full_plot_save_path: str
+      :param y_label: Label for the Y-axis.
+      :type y_label: str
+      :param x_label: Label for the X-axis.
+      :type x_label: str
+      :param custom_y_lim: Y-axis limits (min, max).
+      :type custom_y_lim: tuple of float
+      :param plot_loc: Location of the legend on the plot (e.g., "upper left").
+      :type plot_loc: str
+
+      :returns: None
+
+
+
+   .. py:method:: simple_plot_three_curves(var_x, var_y, var_z, var_k, title_string, leg_1, leg_2, leg_3, full_plot_save_path, y_label, x_label, custom_y_lim=(0, 1), plot_loc='upper left')
+      :staticmethod:
+
+
+      Plots three curves on the same figure and saves the plot as an image.
+
+      This function draws three Y-series against a common X-axis, adds labels, title, legend,
+      and grid, and saves the figure to the specified file path.
+
+      :param var_x: The X-axis values shared by all curves.
+      :type var_x: array-like
+      :param var_y: Y-values for the first curve.
+      :type var_y: array-like
+      :param var_z: Y-values for the second curve.
+      :type var_z: array-like
+      :param var_k: Y-values for the third curve.
+      :type var_k: array-like
+      :param title_string: Title of the plot.
+      :type title_string: str
+      :param leg_1: Legend label for the first curve.
+      :type leg_1: str
+      :param leg_2: Legend label for the second curve.
+      :type leg_2: str
+      :param leg_3: Legend label for the third curve.
+      :type leg_3: str
+      :param full_plot_save_path: Path to save the resulting plot image.
+      :type full_plot_save_path: str
+      :param y_label: Label for the Y-axis.
+      :type y_label: str
+      :param x_label: Label for the X-axis.
+      :type x_label: str
+      :param custom_y_lim: Y-axis limits (min, max).
+      :type custom_y_lim: tuple of float
+      :param plot_loc: Location of the legend (e.g., "upper left").
+      :type plot_loc: str
+
+      :returns: None
+
+
+
+   .. py:method:: simple_plot_one_curves(var_x, var_y, title_string, leg_1, full_plot_save_path, y_label, x_label, custom_y_lim=(0, 1), plot_loc='upper left')
+      :staticmethod:
+
+
+      Plots a single curve and saves the plot as an image.
+
+      This function draws a Y-series against an X-axis, adds a title, labels,
+      legend, and grid, and saves the figure to the specified file path.
+
+      :param var_x: The X-axis values.
+      :type var_x: array-like
+      :param var_y: The Y-axis values to plot.
+      :type var_y: array-like
+      :param title_string: Title of the plot.
+      :type title_string: str
+      :param leg_1: Legend label for the curve.
+      :type leg_1: str
+      :param full_plot_save_path: Path to save the resulting plot image.
+      :type full_plot_save_path: str
+      :param y_label: Label for the Y-axis.
+      :type y_label: str
+      :param x_label: Label for the X-axis.
+      :type x_label: str
+      :param custom_y_lim: Y-axis limits (min, max).
+      :type custom_y_lim: tuple of float
+      :param plot_loc: Location of the legend (e.g., "upper left").
+      :type plot_loc: str
+
+      :returns: None
+
+
+

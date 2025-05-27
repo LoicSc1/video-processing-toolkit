@@ -83,10 +83,23 @@
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/object_track_bbox/index.html#video_processing_toolkit.utils.object_track_bbox.region_to_bbox">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">region_to_bbox</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Transforms the ground-truth annotation to the convenient format. The</span>
-<span class="sd">    annotations come in different formats depending on the dataset of origin</span>
-<span class="sd">    (see README, --Dataset--, for details), some use 4 numbers and some use 8</span>
-<span class="sd">    numbers to describe the bounding boxes.</span>
+<span class="sd">    Converts a ground-truth region annotation to a standard bounding box format.</span>
+
+<span class="sd">    The input region can be in one of two formats:</span>
+<span class="sd">    - 4 values: [x, y, width, height] — axis-aligned bounding box.</span>
+<span class="sd">    - 8 values: [x1, y1, x2, y2, x3, y3, x4, y4] — rotated bounding box defined by corner points.</span>
+
+<span class="sd">    This function normalizes both formats to the standard form (cx, cy, w, h), where:</span>
+<span class="sd">    - cx, cy = center coordinates of the box</span>
+<span class="sd">    - w, h   = width and height of the box</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        region (list or np.ndarray): List of 4 or 8 numbers describing the bounding box.</span>
+<span class="sd">        center (bool): If True, returns (cx, cy, w, h). If False, returns (x, y, w, h),</span>
+<span class="sd">                       where (x, y) is the top-left corner.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Bounding box in the desired format.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="s1">&#39;GT region format is invalid, should have 4 or 8 entries.&#39;</span>
@@ -102,12 +115,19 @@
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/object_track_bbox/index.html#video_processing_toolkit.utils.object_track_bbox.rect">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rect</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">center</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate the center if center=True, otherwise the 4 number annotations</span>
-<span class="sd">    used in the TempleColor and VOT13 datasets are already in the correct</span>
-<span class="sd">    format.</span>
-<span class="sd">    (cx, cy) is the center and w, h are the width and height of the target</span>
-<span class="sd">    When center is False it returns region, which is a 4 tuple containing the</span>
-<span class="sd">    (x, y) coordinates of the LowerLeft corner and its width and height.</span>
+<span class="sd">    Processes a 4-value axis-aligned bounding box.</span>
+
+<span class="sd">    If center=True, converts the format from (x, y, w, h) to (cx, cy, w, h),</span>
+<span class="sd">    where (x, y) is the top-left corner, and (cx, cy) is the center.</span>
+
+<span class="sd">    If center=False, returns the original (x, y, w, h).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        region (list or np.ndarray): List of 4 values [x, y, width, height].</span>
+<span class="sd">        center (bool): Whether to convert to center-based format.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Bounding box in the chosen format.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">center</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">region</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -126,13 +146,20 @@
 <a class="viewcode-back" href="../../../autoapi/video_processing_toolkit/utils/object_track_bbox/index.html#video_processing_toolkit.utils.object_track_bbox.poly">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">poly</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">center</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculates the center, width and height of the bounding box when the</span>
-<span class="sd">    annotations are 8 number rotated bounding boxes (used in VOT14 and VOT16).</span>
-<span class="sd">    Since the Tracker does not try to estimate the rotation of the target, this</span>
-<span class="sd">    function returns a upright bounding box with the same center width and</span>
-<span class="sd">    height of the original one.</span>
-<span class="sd">    The 8 numbers correspond to the (x,y) coordinates of the each of the 4</span>
-<span class="sd">    corner points of the bounding box.</span>
+<span class="sd">    Processes an 8-value rotated bounding box defined by its four corners.</span>
+
+<span class="sd">    Calculates an axis-aligned bounding box that approximates the rotated one,</span>
+<span class="sd">    preserving its center and approximate area. This is useful when the tracking</span>
+<span class="sd">    algorithm does not support rotated boxes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        region (list or np.ndarray): List of 8 values representing the (x, y) coordinates</span>
+<span class="sd">                                     of the four corners of the box, in order.</span>
+<span class="sd">        center (bool): If True, returns (cx, cy, w, h). Otherwise, returns (x, y, w, h)</span>
+<span class="sd">                       where (x, y) is the top-left corner of the axis-aligned box.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Bounding box approximating the original rotated box.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">region</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
     <span class="n">cy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">region</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>

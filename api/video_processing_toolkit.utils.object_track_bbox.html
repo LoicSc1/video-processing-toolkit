@@ -81,33 +81,76 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.object_track_bbox.poly">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.utils.object_track_bbox.</span></span><span class="sig-name descname"><span class="pre">poly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/utils/object_track_bbox.html#poly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.object_track_bbox.poly" title="Link to this definition"></a></dt>
-<dd><p>Calculates the center, width and height of the bounding box when the
-annotations are 8 number rotated bounding boxes (used in VOT14 and VOT16).
-Since the Tracker does not try to estimate the rotation of the target, this
-function returns a upright bounding box with the same center width and
-height of the original one.
-The 8 numbers correspond to the (x,y) coordinates of the each of the 4
-corner points of the bounding box.</p>
+<dd><p>Processes an 8-value rotated bounding box defined by its four corners.</p>
+<p>Calculates an axis-aligned bounding box that approximates the rotated one,
+preserving its center and approximate area. This is useful when the tracking
+algorithm does not support rotated boxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>region</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of 8 values representing the (x, y) coordinates
+of the four corners of the box, in order.</p></li>
+<li><p><strong>center</strong> (<em>bool</em>) – If True, returns (cx, cy, w, h). Otherwise, returns (x, y, w, h)
+where (x, y) is the top-left corner of the axis-aligned box.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bounding box approximating the original rotated box.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.object_track_bbox.rect">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.utils.object_track_bbox.</span></span><span class="sig-name descname"><span class="pre">rect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/utils/object_track_bbox.html#rect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.object_track_bbox.rect" title="Link to this definition"></a></dt>
-<dd><p>Calculate the center if center=True, otherwise the 4 number annotations
-used in the TempleColor and VOT13 datasets are already in the correct
-format.
-(cx, cy) is the center and w, h are the width and height of the target
-When center is False it returns region, which is a 4 tuple containing the
-(x, y) coordinates of the LowerLeft corner and its width and height.</p>
+<dd><p>Processes a 4-value axis-aligned bounding box.</p>
+<p>If center=True, converts the format from (x, y, w, h) to (cx, cy, w, h),
+where (x, y) is the top-left corner, and (cx, cy) is the center.</p>
+<p>If center=False, returns the original (x, y, w, h).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>region</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of 4 values [x, y, width, height].</p></li>
+<li><p><strong>center</strong> (<em>bool</em>) – Whether to convert to center-based format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bounding box in the chosen format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.utils.object_track_bbox.region_to_bbox">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.utils.object_track_bbox.</span></span><span class="sig-name descname"><span class="pre">region_to_bbox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">region</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/utils/object_track_bbox.html#region_to_bbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.utils.object_track_bbox.region_to_bbox" title="Link to this definition"></a></dt>
-<dd><p>Transforms the ground-truth annotation to the convenient format. The
-annotations come in different formats depending on the dataset of origin
-(see README, –Dataset–, for details), some use 4 numbers and some use 8
-numbers to describe the bounding boxes.</p>
+<dd><p>Converts a ground-truth region annotation to a standard bounding box format.</p>
+<p>The input region can be in one of two formats:
+- 4 values: [x, y, width, height] — axis-aligned bounding box.
+- 8 values: [x1, y1, x2, y2, x3, y3, x4, y4] — rotated bounding box defined by corner points.</p>
+<p>This function normalizes both formats to the standard form (cx, cy, w, h), where:
+- cx, cy = center coordinates of the box
+- w, h   = width and height of the box</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>region</strong> (<em>list</em><em> or </em><em>np.ndarray</em>) – List of 4 or 8 numbers describing the bounding box.</p></li>
+<li><p><strong>center</strong> (<em>bool</em>) – If True, returns (cx, cy, w, h). If False, returns (x, y, w, h),
+where (x, y) is the top-left corner.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bounding box in the desired format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
