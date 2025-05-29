@@ -118,6 +118,8 @@
 <span class="sd">    Returns: </span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
     <span class="n">frame_types</span> <span class="o">=</span> <span class="n">get_frame_types</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span>
     <span class="n">i_frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frame_types</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">]</span>
 
@@ -139,7 +141,7 @@
 
             <span class="n">create_img_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/frame_</span><span class="si">{</span><span class="n">timestamp_str</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
 
-            <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">path_out</span> <span class="o">+</span> <span class="n">create_img_name</span>
+            <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">create_img_name</span><span class="p">)</span>
             <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">full_frame_saving_path</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
 
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved: &#39;</span> <span class="o">+</span> <span class="n">full_frame_saving_path</span><span class="p">)</span>
@@ -165,7 +167,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># basename = os.path.splitext(os.path.basename(video_file))[0]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span>
 
     <span class="n">time_data_split_start</span> <span class="o">=</span> <span class="n">hh_mm_ss_start</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -213,7 +215,7 @@
                 <span class="n">create_img_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;frame_</span><span class="si">{</span><span class="n">timestamp_str</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
                 <span class="c1">#create_img_name = &quot;/&quot; + str(blank_cnt) + &quot;frame_&quot; + str(frame_no) + &quot;.jpg&quot;</span>
 
-                <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">path_out</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">create_img_name</span>
+                <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">create_img_name</span><span class="p">)</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">full_frame_saving_path</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
 
                 <span class="c1"># print(&#39;Saved: &#39; + full_frame_saving_path)</span>
@@ -237,10 +239,10 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">frame_types</span> <span class="o">=</span> <span class="n">get_frame_types</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span>
     <span class="n">i_frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frame_types</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">i_frames</span><span class="p">:</span>
-        <span class="c1"># basename = os.path.splitext(os.path.basename(video_file))[0]</span>
         <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span>
         <span class="n">fps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">))</span>
 
@@ -255,12 +257,11 @@
             <span class="n">ss</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp_sec</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span>
             <span class="n">timestamp_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hh</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">mm</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">ss</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="n">create_img_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;frame_</span><span class="si">{</span><span class="n">timestamp_str</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
-            <span class="c1"># create_img_name = &quot;/&quot; + str(blank_cnt) +&quot;frame_&quot; + str(frame_no) + &quot;.jpg&quot;</span>
 
-            <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">path_out</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">create_img_name</span>
+            <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">create_img_name</span><span class="p">)</span>
             <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">full_frame_saving_path</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
 
-            <span class="c1"># print(&#39;Saved: &#39; + full_frame_saving_path)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved: &#39;</span> <span class="o">+</span> <span class="n">full_frame_saving_path</span><span class="p">)</span>
 
             <span class="n">blank_cnt</span> <span class="o">=</span> <span class="n">blank_cnt</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -283,7 +284,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># basename = os.path.splitext(os.path.basename(video_file))[0]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span>
 
     <span class="n">time_data_split_start</span> <span class="o">=</span> <span class="n">hh_mm_ss_start</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -328,12 +329,11 @@
                 <span class="n">ss</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp_sec</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span>
                 <span class="n">timestamp_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hh</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">mm</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">ss</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="n">create_img_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;frame_</span><span class="si">{</span><span class="n">timestamp_str</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
-                <span class="c1"># create_img_name = &quot;/&quot; + str(blank_cnt) + &quot;frame_&quot; + str(frame_no) + &quot;.jpg&quot;</span>
 
-                <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">path_out</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">create_img_name</span>
+                <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">create_img_name</span><span class="p">)</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">full_frame_saving_path</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
 
-                <span class="c1"># print(&#39;Saved: &#39; + full_frame_saving_path)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved: &#39;</span> <span class="o">+</span> <span class="n">full_frame_saving_path</span><span class="p">)</span>
 
                 <span class="n">blank_cnt</span> <span class="o">=</span> <span class="n">blank_cnt</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
