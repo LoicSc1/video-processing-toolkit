@@ -1,28 +1,13 @@
-video_processing_toolkit
-========================
+video_processing_toolkit.video_processing
+=========================================
 
-.. py:module:: video_processing_toolkit
-
-.. autoapi-nested-parse::
-
-   Top-level package for Video Processing Toolkit.
-
-
-
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 1
-
-   /autoapi/video_processing_toolkit/video_cutting/index
-   /autoapi/video_processing_toolkit/video_processing/index
+.. py:module:: video_processing_toolkit.video_processing
 
 
 
 
-Package Contents
-----------------
+Module Contents
+---------------
 
 .. py:function:: get_frame_types(video_file)
 
@@ -229,33 +214,6 @@ Package Contents
    Example usage :
        process_input_video_give_video_output("input_video_path", "output_video_path",
        handlle_nils_field_segmentation)
-   :returns: None
-
-
-.. py:function:: get_clip(input_filename, output_filename, start_time, end_time)
-
-   Cuts a video using ffmpeg with re-encoding to ensure clean playback.
-
-   :param input_filename: Path to the input video.
-   :type input_filename: str
-   :param output_filename: Path to save the output video.
-   :type output_filename: str
-   :param start_time: Start time in seconds.
-   :type start_time: float
-   :param end_time: End time in seconds.
-   :type end_time: float
-
-
-.. py:function:: cut_video_clips(input_filename, output_file_path, time_stamp_start_1, time_stamp_end_1)
-
-   Function to read several start and end time stamps, mentioned in two vectors; "time_stamp_start_1" and
-   "time_stamp_end_1", to crop the video clips based on these start and end time stamps.
-
-   :param input_filename: Path of the input video file
-   :param output_file_path: The path of the output file clip
-   :param time_stamp_start_1: The list of start time in HH:MM:SS format
-   :param time_stamp_end_1: The list of end time in HH:MM:SS format.
-
    :returns: None
 
 

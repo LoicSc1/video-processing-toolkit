@@ -11,97 +11,11 @@ Module Contents
 
 .. py:function:: show_frame(frame, bbox, fig_n, pause=2)
 
-   Displays a single video frame with a bounding box overlaid.
-
-   This function opens or updates a matplotlib figure window to display the provided
-   image (frame) along with a red rectangle representing the bounding box. It is useful
-   for visualizing object tracking or detection results during processing or debugging.
-
-   :param frame: The image to display, typically a frame from a video.
-                 Should be in RGB format with dtype uint8 or convertible to it.
-   :type frame: np.ndarray
-   :param bbox: Bounding box to draw on the image, in the format [x, y, width, height].
-   :type bbox: list or tuple
-   :param fig_n: The figure number used by matplotlib. This allows reusing the same window.
-   :type fig_n: int
-   :param pause: Duration in seconds to keep the image displayed. Defaults to 2.
-   :type pause: float, optional
-
-
 .. py:function:: show_frame_and_response_map(frame, bbox, fig_n, crop_x, score, pause=2)
-
-   Displays a visualization of the tracking process with three side-by-side views.
-
-   This function is used in the context of object tracking to visually understand
-   how the model processes the input and where it believes the tracked object is.
-   It shows the current frame with the ground truth bounding box, the reference
-   crop used by the tracker, and the response map (heatmap) indicating the predicted
-   object location.
-
-   :param frame: The current video frame (RGB) where the object is being tracked.
-   :type frame: np.ndarray
-   :param bbox: Ground truth bounding box in the frame, given as [x, y, width, height].
-   :type bbox: list or tuple
-   :param fig_n: The matplotlib figure number to use (helps reuse the same window).
-   :type fig_n: int
-   :param crop_x: The template or context crop extracted from the previous frame.
-   :type crop_x: np.ndarray
-   :param score: The response map (heatmap) showing where the tracker predicts the object is.
-   :type score: np.ndarray
-   :param pause: How long (in seconds) to pause and display the figure. Defaults to 2.
-   :type pause: float, optional
-
 
 .. py:function:: save_frame_and_response_map(frame, bbox, fig_n, crop_x, score, writer, fig)
 
-   Saves a visual representation of the tracking process into a video frame.
-
-   The function displays three elements in one figure:
-   - The current frame with a bounding box showing the object's position,
-   - The reference crop extracted from the previous frame,
-   - The response map showing where the model predicts the object is.
-
-   The figure is added as a frame to a video using the provided writer.
-
-   :param frame: The current RGB video frame.
-   :type frame: np.ndarray
-   :param bbox: Bounding box coordinates [x, y, width, height].
-   :type bbox: list or tuple
-   :param fig_n: Figure number (not used).
-   :type fig_n: int
-   :param crop_x: The cropped region around the object (template).
-   :type crop_x: np.ndarray
-   :param score: The model's response map (prediction heatmap).
-   :type score: np.ndarray
-   :param writer: A matplotlib writer object to record video frames.
-   :param fig: A matplotlib figure object to draw the visuals.
-
-
 .. py:function:: show_crops(crops, fig_n)
 
-   Displays three cropped image patches side by side in a single figure.
-
-   This function is typically used in object tracking tasks to visualize and compare
-   different image crops, such as the template, search region, and prediction patch.
-
-   :param crops: A NumPy array of shape (3, H, W, C), containing three image crops.
-                 Each crop should be an RGB image with values convertible to uint8.
-   :type crops: np.ndarray
-   :param fig_n: The matplotlib figure number to use for displaying the crops.
-   :type fig_n: int
-
-
 .. py:function:: show_scores(scores, fig_n)
-
-   Displays three score maps (heatmaps) side by side in a single figure.
-
-   This function is typically used to visualize response maps or confidence scores
-   produced by an object tracking or detection model. Each map is displayed using
-   a 'hot' colormap to highlight high-confidence areas.
-
-   :param scores: A NumPy array of shape (3, H, W), containing three 2D score maps.
-   :type scores: np.ndarray
-   :param fig_n: The matplotlib figure number to use for displaying the heatmaps.
-   :type fig_n: int
-
 

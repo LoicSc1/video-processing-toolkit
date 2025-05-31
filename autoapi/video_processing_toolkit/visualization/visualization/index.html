@@ -19,9 +19,7 @@
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Contributing" href="../../../../contributing.html" />
-    <link rel="prev" title="video_processing_toolkit.visualization" href="../index.html" /> 
+    <link rel="search" title="Search" href="../../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,24 +42,11 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">Video Processing Toolkit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">video_processing_toolkit</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../../cli/index.html">video_processing_toolkit.cli</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../core/index.html">video_processing_toolkit.core</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">video_processing_toolkit.utils</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../index.html">video_processing_toolkit.visualization</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../../index.html#package-contents">Package Contents</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../authors.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../history.html">History</a></li>
@@ -81,9 +66,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../index.html">API Reference</a></li>
-          <li class="breadcrumb-item"><a href="../../index.html">video_processing_toolkit</a></li>
-          <li class="breadcrumb-item"><a href="../index.html">video_processing_toolkit.visualization</a></li>
       <li class="breadcrumb-item active">video_processing_toolkit.visualization.visualization</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../../_sources/autoapi/video_processing_toolkit/visualization/visualization/index.rst.txt" rel="nofollow"> View page source</a>
@@ -100,104 +82,28 @@
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.visualization.visualization.show_frame">
-<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pause</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/visualization/visualization.html#show_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_frame" title="Link to this definition"></a></dt>
-<dd><p>Displays a single video frame with a bounding box overlaid.</p>
-<p>This function opens or updates a matplotlib figure window to display the provided
-image (frame) along with a red rectangle representing the bounding box. It is useful
-for visualizing object tracking or detection results during processing or debugging.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>frame</strong> (<em>np.ndarray</em>) – The image to display, typically a frame from a video.
-Should be in RGB format with dtype uint8 or convertible to it.</p></li>
-<li><p><strong>bbox</strong> (<em>list</em><em> or </em><em>tuple</em>) – Bounding box to draw on the image, in the format [x, y, width, height].</p></li>
-<li><p><strong>fig_n</strong> (<em>int</em>) – The figure number used by matplotlib. This allows reusing the same window.</p></li>
-<li><p><strong>pause</strong> (<em>float</em><em>, </em><em>optional</em>) – Duration in seconds to keep the image displayed. Defaults to 2.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pause</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_frame" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.visualization.visualization.show_frame_and_response_map">
-<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_frame_and_response_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pause</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/visualization/visualization.html#show_frame_and_response_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_frame_and_response_map" title="Link to this definition"></a></dt>
-<dd><p>Displays a visualization of the tracking process with three side-by-side views.</p>
-<p>This function is used in the context of object tracking to visually understand
-how the model processes the input and where it believes the tracked object is.
-It shows the current frame with the ground truth bounding box, the reference
-crop used by the tracker, and the response map (heatmap) indicating the predicted
-object location.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>frame</strong> (<em>np.ndarray</em>) – The current video frame (RGB) where the object is being tracked.</p></li>
-<li><p><strong>bbox</strong> (<em>list</em><em> or </em><em>tuple</em>) – Ground truth bounding box in the frame, given as [x, y, width, height].</p></li>
-<li><p><strong>fig_n</strong> (<em>int</em>) – The matplotlib figure number to use (helps reuse the same window).</p></li>
-<li><p><strong>crop_x</strong> (<em>np.ndarray</em>) – The template or context crop extracted from the previous frame.</p></li>
-<li><p><strong>score</strong> (<em>np.ndarray</em>) – The response map (heatmap) showing where the tracker predicts the object is.</p></li>
-<li><p><strong>pause</strong> (<em>float</em><em>, </em><em>optional</em>) – How long (in seconds) to pause and display the figure. Defaults to 2.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_frame_and_response_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pause</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_frame_and_response_map" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.visualization.visualization.save_frame_and_response_map">
-<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">save_frame_and_response_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/visualization/visualization.html#save_frame_and_response_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.save_frame_and_response_map" title="Link to this definition"></a></dt>
-<dd><p>Saves a visual representation of the tracking process into a video frame.</p>
-<p>The function displays three elements in one figure:
-- The current frame with a bounding box showing the object’s position,
-- The reference crop extracted from the previous frame,
-- The response map showing where the model predicts the object is.</p>
-<p>The figure is added as a frame to a video using the provided writer.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>frame</strong> (<em>np.ndarray</em>) – The current RGB video frame.</p></li>
-<li><p><strong>bbox</strong> (<em>list</em><em> or </em><em>tuple</em>) – Bounding box coordinates [x, y, width, height].</p></li>
-<li><p><strong>fig_n</strong> (<em>int</em>) – Figure number (not used).</p></li>
-<li><p><strong>crop_x</strong> (<em>np.ndarray</em>) – The cropped region around the object (template).</p></li>
-<li><p><strong>score</strong> (<em>np.ndarray</em>) – The model’s response map (prediction heatmap).</p></li>
-<li><p><strong>writer</strong> – A matplotlib writer object to record video frames.</p></li>
-<li><p><strong>fig</strong> – A matplotlib figure object to draw the visuals.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">save_frame_and_response_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crop_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">writer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.save_frame_and_response_map" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.visualization.visualization.show_crops">
-<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_crops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/visualization/visualization.html#show_crops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_crops" title="Link to this definition"></a></dt>
-<dd><p>Displays three cropped image patches side by side in a single figure.</p>
-<p>This function is typically used in object tracking tasks to visualize and compare
-different image crops, such as the template, search region, and prediction patch.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>crops</strong> (<em>np.ndarray</em>) – A NumPy array of shape (3, H, W, C), containing three image crops.
-Each crop should be an RGB image with values convertible to uint8.</p></li>
-<li><p><strong>fig_n</strong> (<em>int</em>) – The matplotlib figure number to use for displaying the crops.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_crops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crops</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_crops" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.visualization.visualization.show_scores">
-<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/video_processing_toolkit/visualization/visualization.html#show_scores"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_scores" title="Link to this definition"></a></dt>
-<dd><p>Displays three score maps (heatmaps) side by side in a single figure.</p>
-<p>This function is typically used to visualize response maps or confidence scores
-produced by an object tracking or detection model. Each map is displayed using
-a ‘hot’ colormap to highlight high-confidence areas.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>scores</strong> (<em>np.ndarray</em>) – A NumPy array of shape (3, H, W), containing three 2D score maps.</p></li>
-<li><p><strong>fig_n</strong> (<em>int</em>) – The matplotlib figure number to use for displaying the heatmaps.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.visualization.visualization.</span></span><span class="sig-name descname"><span class="pre">show_scores</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#video_processing_toolkit.visualization.visualization.show_scores" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 </section>
@@ -205,10 +111,7 @@ a ‘hot’ colormap to highlight high-confidence areas.</p>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="video_processing_toolkit.visualization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../../../contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

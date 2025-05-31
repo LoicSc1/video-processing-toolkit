@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>video_processing_toolkit.core &mdash; Video Processing Toolkit 0.1.0 documentation</title>
+  <title>video_processing_toolkit.video_processing &mdash; Video Processing Toolkit 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -66,7 +66,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">video_processing_toolkit.core</li>
+      <li class="breadcrumb-item active">video_processing_toolkit.video_processing</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -75,7 +75,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for video_processing_toolkit.core</h1><div class="highlight"><pre>
+  <h1>Source code for video_processing_toolkit.video_processing</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">cv2</span>
@@ -83,9 +83,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">ffmpy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOADED MODULE: </span><span class="si">{</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
 
 <div class="viewcode-block" id="get_frame_types">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.get_frame_types">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.get_frame_types">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_frame_types</span><span class="p">(</span><span class="n">video_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to extract the type of each frame in a video using ffprobe.</span>
@@ -108,7 +110,7 @@
 
 
 <div class="viewcode-block" id="save_all_i_keyframes">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_i_keyframes">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.save_all_i_keyframes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_i_keyframes</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract and save all I-frames of a complete video as image files.</span>
 
@@ -155,7 +157,7 @@
 
 
 <div class="viewcode-block" id="save_all_i_keyframes_between_two_timestamps">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_i_keyframes_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.save_all_i_keyframes_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_i_keyframes_between_two_timestamps</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract and save all the I-frames of a complete video as image files between two timestamps.</span>
 
@@ -229,7 +231,7 @@
 
 
 <div class="viewcode-block" id="save_all_p_keyframes">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_p_keyframes">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.save_all_p_keyframes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_p_keyframes</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all P-frames from a complete video as image files.</span>
 
@@ -272,7 +274,7 @@
 
 
 <div class="viewcode-block" id="save_all_p_keyframes_between_two_timestamps">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.save_all_p_keyframes_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.save_all_p_keyframes_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_p_keyframes_between_two_timestamps</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract  and save all the p-key frames of a complete video.</span>
 
@@ -344,7 +346,7 @@
 
 
 <div class="viewcode-block" id="convert_video">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.convert_video">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.convert_video">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convert_video</span><span class="p">(</span><span class="n">inputed_file</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to convert the video file into .avi format and save it into current project directory.</span>
 
@@ -364,7 +366,7 @@
 
 
 <div class="viewcode-block" id="compute_frame_per_sec_rate">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.compute_frame_per_sec_rate">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.compute_frame_per_sec_rate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_frame_per_sec_rate</span><span class="p">(</span><span class="n">video_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to compute the frame per seconds or pfs.</span>
 
@@ -389,7 +391,7 @@
 
 
 <div class="viewcode-block" id="frames_to_video">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.frames_to_video">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.frames_to_video">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">frames_to_video</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">fps</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function reads all the individual frames, saved in a directory and then use them to create a video.</span>
 
@@ -421,7 +423,7 @@
 
 
 <div class="viewcode-block" id="video_to_all_frames">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.video_to_all_frames">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.video_to_all_frames">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">video_to_all_frames</span><span class="p">(</span><span class="n">input_loc</span><span class="p">,</span> <span class="n">output_loc</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all the frames from input video file and save them as separate frames in an output directory.</span>
 
@@ -469,7 +471,7 @@
 
 
 <div class="viewcode-block" id="extract_images_regular_interval">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_images_regular_interval">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.extract_images_regular_interval">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_images_regular_interval</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">time_interval_in_sec</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract the frames in every given &quot;time_interval&quot; e.g. 1 sec, 5 sec etc. from input video file</span>
 <span class="sd">    and save them as separate frames in an output directory.</span>
@@ -505,7 +507,7 @@
 
 
 <div class="viewcode-block" id="extract_images_at_particular_timestamp">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_images_at_particular_timestamp">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.extract_images_at_particular_timestamp">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_images_at_particular_timestamp</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract the frame at a particular time stamp; Need to know the number of frames per second and the</span>
 <span class="sd">    timestamp in the video , we want to take frame from, we can easily calculate the frame number we want.</span>
@@ -551,7 +553,7 @@
 
 
 <div class="viewcode-block" id="extract_images_between_two_timestamps">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_images_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.extract_images_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_images_between_two_timestamps</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract all the frames within two timestamps; Need to know the number of frames per second and the</span>
 <span class="sd">    start and end timestamp in the video.</span>
@@ -614,7 +616,7 @@
 
 
 <div class="viewcode-block" id="extract_regular_interval_images_between_two_timestamps">
-<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/index.html#video_processing_toolkit.core.extract_regular_interval_images_between_two_timestamps">[docs]</a>
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.extract_regular_interval_images_between_two_timestamps">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">extract_regular_interval_images_between_two_timestamps</span><span class="p">(</span><span class="n">path_in</span><span class="p">,</span> <span class="n">path_out</span><span class="p">,</span> <span class="n">hh_mm_ss_start</span><span class="p">,</span> <span class="n">hh_mm_ss_end</span><span class="p">,</span>
                                                            <span class="n">time_interval_in_sec</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to extract frames after given regular intervals within two timestamps; Need to know the number of</span>
@@ -688,6 +690,91 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done extracting frames.</span><span class="se">\n</span><span class="si">%d</span><span class="s2"> frames extracted&quot;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span></div>
 
     <span class="c1"># break</span>
+
+<div class="viewcode-block" id="process_input_video_give_video_output">
+<a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.process_input_video_give_video_output">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_input_video_give_video_output</span><span class="p">(</span><span class="n">input_loc</span><span class="p">,</span> <span class="n">output_loc</span><span class="p">,</span> <span class="n">function_to_apply</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to apply the processing on each frames from input video file and create another video.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            input_loc: Input video file</span>
+<span class="sd">            output_loc: The path of output video file</span>
+<span class="sd">            function_to_apply : The function in which the processing will be applied. Remember, this function should</span>
+<span class="sd">            take opencv frame i.e. a numpy array (nd.array) as the input and will return the same i.e. a numpy array.</span>
+<span class="sd">        Example usage :</span>
+<span class="sd">            process_input_video_give_video_output(&quot;input_video_path&quot;, &quot;output_video_path&quot;,</span>
+<span class="sd">            handlle_nils_field_segmentation)</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">vidcap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">input_loc</span><span class="p">)</span>  <span class="c1"># read the video</span>
+        <span class="n">get_fps</span> <span class="o">=</span> <span class="n">VideoOperation</span><span class="o">.</span><span class="n">compute_frame_per_sec_rate</span><span class="p">(</span><span class="n">vidcap</span><span class="p">)</span>
+
+        <span class="c1"># Log the time</span>
+        <span class="n">time_start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="c1"># Start capturing the feed</span>
+        <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">input_loc</span><span class="p">)</span>
+
+        <span class="c1"># Find the number of frames</span>
+        <span class="n">video_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of frames: &quot;</span><span class="p">,</span> <span class="n">video_length</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Converting video..</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Just to get the size of image frames</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">cap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
+            <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="c1"># cap.release()  # Release the feed</span>
+                <span class="k">break</span>
+
+        <span class="n">fourcc</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoWriter_fourcc</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoWriter</span><span class="p">(</span><span class="n">output_loc</span><span class="p">,</span> <span class="n">fourcc</span><span class="p">,</span> <span class="n">get_fps</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+
+        <span class="c1"># Start converting the video</span>
+        <span class="k">while</span> <span class="n">cap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
+            <span class="c1"># Extract the frame</span>
+            <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done processing the BAD frame </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">video_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># Log the time again</span>
+                    <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>  <span class="c1"># Release the feed</span>
+
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">%d</span><span class="s2"> seconds for conversion and last frame was BAD&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span><span class="p">))</span>
+                    <span class="k">break</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># get_mask_2 = ColorProcessing.compute_field_mask_cvprw_2018(frame, &quot;threshold_approximation&quot;)</span>
+            <span class="c1"># masked_2 = cv2.bitwise_and(frame, frame, mask=get_mask_2)</span>
+
+            <span class="n">masked_2</span> <span class="o">=</span> <span class="n">function_to_apply</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">masked_2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done processing the GOOD frame </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
+
+            <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="c1"># If there are no more frames left</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">video_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">time_end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># Log the time again</span>
+                <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>  <span class="c1"># Release the feed</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done extracting frames.</span><span class="se">\n</span><span class="si">%d</span><span class="s2"> frames extracted&quot;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It took </span><span class="si">%d</span><span class="s2"> seconds for conversion.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time_end</span> <span class="o">-</span> <span class="n">time_start</span><span class="p">))</span>
+                <span class="k">break</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOADED MODULE: </span><span class="si">{</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
            </div>
