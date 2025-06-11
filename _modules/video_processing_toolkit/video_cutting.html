@@ -77,12 +77,14 @@
              
   <h1>Source code for video_processing_toolkit.video_cutting</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.video_processing</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_frame_per_sec_rate</span>
 
 <div class="viewcode-block" id="get_clip">
 <a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_cutting/index.html#video_processing_toolkit.video_cutting.get_clip">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_clip</span><span class="p">(</span><span class="n">input_filename</span><span class="p">,</span> <span class="n">output_filename</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cuts a video using ffmpeg with re-encoding to ensure clean playback.</span>
+<span class="sd">    Cuts a video using ffmpeg while preserving the original framerate and </span>
+<span class="sd">    forcing one I-frame per second for clean frame extraction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        input_filename (str): Path to the input video.</span>
@@ -90,17 +92,27 @@
 <span class="sd">        start_time (float): Start time in seconds.</span>
 <span class="sd">        end_time (float): End time in seconds.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">framerate</span> <span class="o">=</span> <span class="n">compute_frame_per_sec_rate</span><span class="p">(</span><span class="n">input_filename</span><span class="p">)</span>
+    <span class="n">gop_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">framerate</span><span class="p">)</span>
+
     <span class="n">command</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;ffmpeg&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-y&quot;</span><span class="p">,</span>  <span class="c1"># Overwrite without asking</span>
-        <span class="s2">&quot;-ss&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">start_time</span><span class="p">),</span>
-        <span class="s2">&quot;-to&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">end_time</span><span class="p">),</span>
-        <span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="n">input_filename</span><span class="p">,</span>
-        <span class="s2">&quot;-c:v&quot;</span><span class="p">,</span> <span class="s2">&quot;libx264&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-c:a&quot;</span><span class="p">,</span> <span class="s2">&quot;aac&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;-strict&quot;</span><span class="p">,</span> <span class="s2">&quot;experimental&quot;</span><span class="p">,</span>
-        <span class="n">output_filename</span>
+        <span class="s2">&quot;-y&quot;</span><span class="p">,</span>                           <span class="c1"># Overwrite output file without asking</span>
+        <span class="s2">&quot;-ss&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">start_time</span><span class="p">),</span>        <span class="c1"># Start time of the clip (in seconds or HH:MM:SS)</span>
+        <span class="s2">&quot;-to&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">end_time</span><span class="p">),</span>          <span class="c1"># End time of the clip</span>
+        <span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="n">input_filename</span><span class="p">,</span>          <span class="c1"># Input video file</span>
+        <span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">framerate</span><span class="p">),</span>          <span class="c1"># Set output video framerate</span>
+        <span class="s2">&quot;-c:v&quot;</span><span class="p">,</span> <span class="s2">&quot;libx264&quot;</span><span class="p">,</span>             <span class="c1"># Encode video using H.264 codec</span>
+        <span class="s2">&quot;-crf&quot;</span><span class="p">,</span> <span class="s2">&quot;23&quot;</span><span class="p">,</span>                  <span class="c1"># Constant Rate Factor (quality setting, lower is better quality)</span>
+        <span class="s2">&quot;-g&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">gop_size</span><span class="p">),</span>           <span class="c1"># Group of Pictures size (distance between I-frames)</span>
+        <span class="s2">&quot;-keyint_min&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">gop_size</span><span class="p">),</span> <span class="c1"># Minimum interval between I-frames (set equal to GOP size for forced I-frame interval)</span>
+        <span class="s2">&quot;-sc_threshold&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>         <span class="c1"># Scene change threshold (0 disables scene detection for I-frames)</span>
+        <span class="s2">&quot;-preset&quot;</span><span class="p">,</span> <span class="s2">&quot;slow&quot;</span><span class="p">,</span>            <span class="c1"># Compression efficiency vs. speed</span>
+        <span class="s2">&quot;-movflags&quot;</span><span class="p">,</span> <span class="s2">&quot;+faststart&quot;</span><span class="p">,</span>    <span class="c1"># Optimize MP4 for web streaming</span>
+        <span class="s2">&quot;-c:a&quot;</span><span class="p">,</span> <span class="s2">&quot;aac&quot;</span><span class="p">,</span>                <span class="c1"># Encode audio using AAC codec</span>
+        <span class="n">output_filename</span>               <span class="c1"># Output video file path</span>
     <span class="p">]</span>
+
     <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
@@ -112,10 +124,10 @@
 <span class="sd">        &quot;time_stamp_end_1&quot;, to crop the video clips based on these start and end time stamps.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            input_filename: Path of the input video file</span>
-<span class="sd">            output_file_path: The path of the output file clip</span>
-<span class="sd">            time_stamp_start_1 : The list of start time in HH:MM:SS format</span>
-<span class="sd">            time_stamp_end_1 : The list of end time in HH:MM:SS format.</span>
+<span class="sd">            input_filename (str): Path of the input video file</span>
+<span class="sd">            output_file_path (str): The path of the output file clip</span>
+<span class="sd">            time_stamp_start_1 (List[str]): The list of start time in HH:MM:SS format</span>
+<span class="sd">            time_stamp_end_1 (List[str]): The list of end time in HH:MM:SS format.</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>

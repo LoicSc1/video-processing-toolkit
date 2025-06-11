@@ -86,10 +86,10 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>input_filename</strong> – Path of the input video file</p></li>
-<li><p><strong>output_file_path</strong> – The path of the output file clip</p></li>
-<li><p><strong>time_stamp_start_1</strong> – The list of start time in HH:MM:SS format</p></li>
-<li><p><strong>time_stamp_end_1</strong> – The list of end time in HH:MM:SS format.</p></li>
+<li><p><strong>input_filename</strong> (<em>str</em>) – Path of the input video file</p></li>
+<li><p><strong>output_file_path</strong> (<em>str</em>) – The path of the output file clip</p></li>
+<li><p><strong>time_stamp_start_1</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – The list of start time in HH:MM:SS format</p></li>
+<li><p><strong>time_stamp_end_1</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – The list of end time in HH:MM:SS format.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -101,7 +101,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="video_processing_toolkit.video_cutting.get_clip">
 <span class="sig-prename descclassname"><span class="pre">video_processing_toolkit.video_cutting.</span></span><span class="sig-name descname"><span class="pre">get_clip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/video_processing_toolkit/video_cutting.html#get_clip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#video_processing_toolkit.video_cutting.get_clip" title="Link to this definition"></a></dt>
-<dd><p>Cuts a video using ffmpeg with re-encoding to ensure clean playback.</p>
+<dd><p>Cuts a video using ffmpeg while preserving the original framerate and
+forcing one I-frame per second for clean frame extraction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

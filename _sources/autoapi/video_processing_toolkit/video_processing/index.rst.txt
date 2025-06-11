@@ -95,15 +95,15 @@ Module Contents
    :rtype: str
 
 
-.. py:function:: compute_frame_per_sec_rate(video_file: str) -> int
+.. py:function:: compute_frame_per_sec_rate(video_file: str) -> float
 
-   Function to compute the frame per seconds or pfs.
+   Compute the framerate (frames per second) of the video using OpenCV.
 
-   :param video_file: Path of the video file.
+   :param video_file: Path to the video file.
    :type video_file: str
 
-   :returns: The Frame rate of the created video stream.
-   :rtype: int
+   :returns: The framerate of the video.
+   :rtype: float
 
 
 .. py:function:: frames_to_video(input_path, output_path, fps)

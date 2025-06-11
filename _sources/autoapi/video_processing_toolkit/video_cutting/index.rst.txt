@@ -11,7 +11,8 @@ Module Contents
 
 .. py:function:: get_clip(input_filename, output_filename, start_time, end_time)
 
-   Cuts a video using ffmpeg with re-encoding to ensure clean playback.
+   Cuts a video using ffmpeg while preserving the original framerate and
+   forcing one I-frame per second for clean frame extraction.
 
    :param input_filename: Path to the input video.
    :type input_filename: str
@@ -29,9 +30,13 @@ Module Contents
    "time_stamp_end_1", to crop the video clips based on these start and end time stamps.
 
    :param input_filename: Path of the input video file
+   :type input_filename: str
    :param output_file_path: The path of the output file clip
+   :type output_file_path: str
    :param time_stamp_start_1: The list of start time in HH:MM:SS format
+   :type time_stamp_start_1: List[str]
    :param time_stamp_end_1: The list of end time in HH:MM:SS format.
+   :type time_stamp_end_1: List[str]
 
    :returns: None
 

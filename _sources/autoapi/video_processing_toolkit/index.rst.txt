@@ -110,15 +110,15 @@ Package Contents
    :rtype: str
 
 
-.. py:function:: compute_frame_per_sec_rate(video_file: str) -> int
+.. py:function:: compute_frame_per_sec_rate(video_file: str) -> float
 
-   Function to compute the frame per seconds or pfs.
+   Compute the framerate (frames per second) of the video using OpenCV.
 
-   :param video_file: Path of the video file.
+   :param video_file: Path to the video file.
    :type video_file: str
 
-   :returns: The Frame rate of the created video stream.
-   :rtype: int
+   :returns: The framerate of the video.
+   :rtype: float
 
 
 .. py:function:: frames_to_video(input_path, output_path, fps)
@@ -232,9 +232,21 @@ Package Contents
    :returns: None
 
 
+.. py:function:: compute_frame_per_sec_rate(video_file: str) -> float
+
+   Compute the framerate (frames per second) of the video using OpenCV.
+
+   :param video_file: Path to the video file.
+   :type video_file: str
+
+   :returns: The framerate of the video.
+   :rtype: float
+
+
 .. py:function:: get_clip(input_filename, output_filename, start_time, end_time)
 
-   Cuts a video using ffmpeg with re-encoding to ensure clean playback.
+   Cuts a video using ffmpeg while preserving the original framerate and
+   forcing one I-frame per second for clean frame extraction.
 
    :param input_filename: Path to the input video.
    :type input_filename: str
@@ -252,9 +264,13 @@ Package Contents
    "time_stamp_end_1", to crop the video clips based on these start and end time stamps.
 
    :param input_filename: Path of the input video file
+   :type input_filename: str
    :param output_file_path: The path of the output file clip
+   :type output_file_path: str
    :param time_stamp_start_1: The list of start time in HH:MM:SS format
+   :type time_stamp_start_1: List[str]
    :param time_stamp_end_1: The list of end time in HH:MM:SS format.
+   :type time_stamp_end_1: List[str]
 
    :returns: None
 
