@@ -28,6 +28,7 @@ A Python toolkit for slicing, annotating, and processing video files for data an
 
 * Free software: MIT license
 * Documentation: https://loicsc1.github.io/video-processing-toolkit.
+* Tip: It’s recommended to fork the project — after initiating the CI workflow, the documentation will be available at https://your-username.github.io/video-processing-toolkit using your own GitHub username.
 
 Features
 --------
