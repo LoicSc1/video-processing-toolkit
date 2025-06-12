@@ -83,8 +83,6 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">ffmpy</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOADED MODULE: </span><span class="si">{</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
 
 <div class="viewcode-block" id="get_frame_types">
 <a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.get_frame_types">[docs]</a>
@@ -108,7 +106,6 @@
     <span class="k">return</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">frame_types</span><span class="p">)),</span> <span class="n">frame_types</span><span class="p">)</span></div>
 
 
-
 <div class="viewcode-block" id="save_all_i_keyframes">
 <a class="viewcode-back" href="../../autoapi/video_processing_toolkit/video_processing/index.html#video_processing_toolkit.video_processing.save_all_i_keyframes">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">save_all_i_keyframes</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">path_out</span><span class="p">):</span>
@@ -126,7 +123,6 @@
     <span class="n">i_frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frame_types</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">i_frames</span><span class="p">:</span>
-        <span class="c1"># basename = os.path.splitext(os.path.basename(video_file))[0]</span>
         <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span>
         <span class="n">fps</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span>
 
@@ -177,7 +173,6 @@
     <span class="n">get_mins_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_start</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">get_secs_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_start</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-    <span class="n">time_in_millisec_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
     <span class="n">time_in_sec_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_start</span><span class="p">)</span>
 
     <span class="n">time_data_split_end</span> <span class="o">=</span> <span class="n">hh_mm_ss_end</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -185,12 +180,8 @@
     <span class="n">get_mins_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_end</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">get_secs_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_end</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-    <span class="n">time_in_millisec_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_end</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
     <span class="n">time_in_sec_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_end</span><span class="p">)</span>
     <span class="n">fps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">))</span>  <span class="c1"># get the frame per seconds</span>
-
-    <span class="c1"># number of frames in video</span>
-    <span class="n">frame_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">))</span>
 
     <span class="c1"># let&#39;s say, we need to compute from 17th sec of the video. Hence, the number of frames will be traversed</span>
     <span class="c1"># after 17th sec  is completed is 17 * 30 = 510 (by taking an example of 30  fps video) Hence, at the end of</span>
@@ -215,12 +206,10 @@
                 <span class="n">ss</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp_sec</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span>
                 <span class="n">timestamp_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hh</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">mm</span><span class="si">:</span><span class="s2">02d</span><span class="si">}{</span><span class="n">ss</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="n">create_img_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;frame_</span><span class="si">{</span><span class="n">timestamp_str</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
-                <span class="c1">#create_img_name = &quot;/&quot; + str(blank_cnt) + &quot;frame_&quot; + str(frame_no) + &quot;.jpg&quot;</span>
 
                 <span class="n">full_frame_saving_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path_out</span><span class="p">,</span> <span class="n">create_img_name</span><span class="p">)</span>
                 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">full_frame_saving_path</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
 
-                <span class="c1"># print(&#39;Saved: &#39; + full_frame_saving_path)</span>
 
                 <span class="n">blank_cnt</span> <span class="o">=</span> <span class="n">blank_cnt</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
@@ -294,7 +283,6 @@
     <span class="n">get_mins_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_start</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">get_secs_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_start</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-    <span class="n">time_in_millisec_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
     <span class="n">time_in_sec_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_start</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_start</span><span class="p">)</span>
 
     <span class="n">time_data_split_end</span> <span class="o">=</span> <span class="n">hh_mm_ss_end</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
@@ -302,12 +290,8 @@
     <span class="n">get_mins_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_end</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">get_secs_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_end</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-    <span class="n">time_in_millisec_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_end</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
     <span class="n">time_in_sec_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_end</span><span class="p">)</span>
     <span class="n">fps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">))</span>  <span class="c1"># get the frame per seconds</span>
-
-    <span class="c1"># number of frames in video</span>
-    <span class="n">frame_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">))</span>
 
     <span class="c1"># let&#39;s say, we need to compute from 17th sec of the video. Hence, the number of frames will be traversed</span>
     <span class="c1"># after 17th sec  is completed is 17 * 30 = 510 (by taking an example of 30  fps video) Hence, at the end of</span>
@@ -439,10 +423,9 @@
     <span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">input_loc</span><span class="p">)</span>
 
     <span class="c1"># Find the number of frames</span>
-    <span class="n">video_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">video_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_COUNT</span><span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of frames: &quot;</span><span class="p">,</span> <span class="n">video_length</span><span class="p">)</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Converting video..</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># Start converting the video</span>
     <span class="k">while</span> <span class="n">cap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
@@ -576,7 +559,6 @@
     <span class="n">get_mins_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_end</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">get_secs_end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time_data_split_end</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-    <span class="c1"># time_in_millisec_end = (get_hours_end * 60 * 60 + get_mins_end*60 + get_secs_end)*1000</span>
     <span class="n">time_in_sec_end</span> <span class="o">=</span> <span class="p">(</span><span class="n">get_hours_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_mins_end</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="n">get_secs_end</span><span class="p">)</span>
 
     <span class="n">fps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">vidcap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">))</span>  <span class="c1"># get the frame per seconds</span>
@@ -747,9 +729,6 @@
                 <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
                 <span class="k">continue</span>
 
-            <span class="c1"># get_mask_2 = ColorProcessing.compute_field_mask_cvprw_2018(frame, &quot;threshold_approximation&quot;)</span>
-            <span class="c1"># masked_2 = cv2.bitwise_and(frame, frame, mask=get_mask_2)</span>
-
             <span class="n">masked_2</span> <span class="o">=</span> <span class="n">function_to_apply</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">masked_2</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done processing the GOOD frame </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">count</span><span class="p">)</span>
@@ -767,8 +746,6 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
 
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOADED MODULE: </span><span class="si">{</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
            </div>

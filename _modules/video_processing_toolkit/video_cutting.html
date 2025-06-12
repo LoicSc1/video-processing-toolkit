@@ -98,7 +98,7 @@
     <span class="n">command</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;ffmpeg&quot;</span><span class="p">,</span>
         <span class="s2">&quot;-y&quot;</span><span class="p">,</span>                           <span class="c1"># Overwrite output file without asking</span>
-        <span class="s2">&quot;-ss&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">start_time</span><span class="p">),</span>        <span class="c1"># Start time of the clip (in seconds or HH:MM:SS)</span>
+        <span class="s2">&quot;-ss&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">start_time</span><span class="p">),</span>        <span class="c1"># Start time of the clip (in seconds)</span>
         <span class="s2">&quot;-to&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">end_time</span><span class="p">),</span>          <span class="c1"># End time of the clip</span>
         <span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="n">input_filename</span><span class="p">,</span>          <span class="c1"># Input video file</span>
         <span class="s2">&quot;-r&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">framerate</span><span class="p">),</span>          <span class="c1"># Set output video framerate</span>
